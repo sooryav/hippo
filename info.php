@@ -1,8 +1,8 @@
 <?php 
 
 
-//echo phpinfo(); 
-//echo $_GET;
+echo phpinfo(); 
+echo $_GET;
 $location = "";
 foreach($_GET as $key=>$val) {
   if ($key == "zip") { 
