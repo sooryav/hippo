@@ -8,7 +8,7 @@ foreach($_GET as $key=>$val) {
     $location = $val;
   }
 
-  print ("Key is: $key<br>");
+  //print ("Key is: $key<br>");
 }
 
 
@@ -23,10 +23,10 @@ else
 
 $result = "";
 if (!$location) {
-  $result = $mysqli->query("SELECT * FROM Venue", $link);
+  $result = $mysqli->query("SELECT * FROM vendor");
 } else {
-  $query = sprintf("SELECT * FROM Venue WHERE zip='%s'", $location);
-  $result =  $mysqli->query($query, $link);
+  $query = sprintf("SELECT * FROM vendor WHERE zip='%s'", $location);
+  $result =  $mysqli->query($query);
 }
 
 
@@ -45,12 +45,35 @@ if ($err) {
             }
             </style>";
   $table = '<table border="">';
-  $table = $table . "<tr><th>ID</th><th>VENUE</th><th>WEBSITE</th></tr>";
+  $table = $table . "<tr><th>FIRST NAME</th><th>LAST NAME</th><th>BUSINESS NAME</th><th>EMAIL</th><th>ADDRESS 1</th><th>CITY</th><th>STATE</th><th>ZIP</th><th>PHONE</th><th>CATEGORY</th><th>ID</th></tr>";
+
+/*first_name VARCHAR(30) NOT NULL,
+last_name VARCHAR(30) NOT NULL,
+business_name VARCHAR(100) NOT NULL,
+email VARCHAR(60) NULL,
+address1 VARCHAR(60) NOT NULL,
+address2 VARCHAR(60) NULL,
+city VARCHAR(40) NOT NULL,
+state VARCHAR(40) NOT NULL,
+zip INT UNSIGNED NOT NULL,
+phone VARCHAR(20) NOT NULL,
+category_id SMALLINT NOT NULL,
+vendor_id INT UNSIGNED NOT NULL PRIMARY KEY);
+*/
+
   while ($row = $result->fetch_assoc()) {
-    $name = $row["name"];
-    $website = $row["website"];
-    $id = $row["id"];
-    $table = $table . "<tr><td>". $id. "</td><td>" .$name. "</td><td><a href='" .$website. "'>".$website."</a></td><tr>";
+    $lastName = $row["last_name"];
+    $firstName = $row["first_name"];
+    $businessName = $row["business_name"];
+    $email = $row["email"];
+    $address1 = $row["address1"];
+    $city = $row["city"];
+    $state = $row["state"];
+    $zip = $row["zip"];
+    //$table = $table . "<tr><td>". $id. "</td><td>" .$name. "</td><td><a href='" .$website. "'>".$website."</a></td><tr>";
+    $table = $table . "<tr><td>" . $lastName . "</td><td>" . $firstName . "</td><td>" . $businessName . "</td><td>" . 
+             $email . "</td><td>" . $address1 . "</td><td>" . $city . "</td><td>" . $state . "</td><td>" . $zip . "</td></tr>";
+
   }
   $table = $table . "</table>";
   echo $style.$table;
@@ -58,4 +81,4 @@ if ($err) {
 
 mysqli_close($mysqli);
 
-?>
+
