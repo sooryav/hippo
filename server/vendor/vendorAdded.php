@@ -56,6 +56,8 @@ if (isset($_POST['submit']))
         $stmt->bind_param('ssi', $firstName, $lastName, $zip);
         $stmt->execute();
 
+        printf("%d Row inserted.\n", $stmt->affected_rows);
+
         $stmt->close();
         $mysqli->close();
     }

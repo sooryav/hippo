@@ -3,6 +3,15 @@
 require_once('../connection.php');
 
 
+$location = "";
+foreach($_GET as $key=>$val) {
+  if ($key == "zip") { 
+    $location = $val;
+  }
+
+  //print ("Key is: $key<br>");
+}
+
 
 $result = "";
 if (!$location) {
