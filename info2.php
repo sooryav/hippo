@@ -62,8 +62,8 @@ vendor_id INT UNSIGNED NOT NULL PRIMARY KEY);
 */
 
   while ($row = $result->fetch_assoc()) {
-    $lastName = $row["last_name"];
     $firstName = $row["first_name"];
+    $lastName = $row["last_name"];
     $businessName = $row["business_name"];
     $email = $row["email"];
     $address1 = $row["address1"];
@@ -71,7 +71,7 @@ vendor_id INT UNSIGNED NOT NULL PRIMARY KEY);
     $state = $row["state"];
     $zip = $row["zip"];
     //$table = $table . "<tr><td>". $id. "</td><td>" .$name. "</td><td><a href='" .$website. "'>".$website."</a></td><tr>";
-    $table = $table . "<tr><td>" . $lastName . "</td><td>" . $firstName . "</td><td>" . $businessName . "</td><td>" . 
+    $table = $table . "<tr><td>" . $firstName . "</td><td>" . $lastName . "</td><td>" . $businessName . "</td><td>" . 
              $email . "</td><td>" . $address1 . "</td><td>" . $city . "</td><td>" . $state . "</td><td>" . $zip . "</td></tr>";
 
   }
