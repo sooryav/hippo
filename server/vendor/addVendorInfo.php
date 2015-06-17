@@ -20,6 +20,10 @@
     <input type="text" name="zip" size="30" maxlength="5" value="" />
     </p>
 
+    <p>Phone:
+    <input type="text" name="phone" size="30" maxlength="5" value="" />
+    </p>
+
 <p>
     <input type="submit" name="submit" value="Send" />
 </p>
