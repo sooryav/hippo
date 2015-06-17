@@ -6,10 +6,9 @@ git commit
 git commit -a --amend
 
 git pull --rebase
-git rebase --configure
 
 git push
-git push origin MASTER:head
+git push origin HEAD:master
 
 git checkout -b <new branch> [origin/master]
 
