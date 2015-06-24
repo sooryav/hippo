@@ -1,0 +1,7 @@
+- Handle $_GET, $_POST params safely.
+
+- Generic way to invoke controller? (such as /module/controller/param ? )
+
+- The view level can also be abstracted one more level.. is it necessary?
+
+
