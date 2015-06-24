@@ -4,6 +4,8 @@ namespace Controller;
 
 require_once(__DIR__ . '/IController.php');
 
+// ControllerBase implements IController interface and
+// provides common functionalities (such as getPath()/getName()).
 abstract class ControllerBase implements IController
 {
     // Stores the path for which the current contoller works.
