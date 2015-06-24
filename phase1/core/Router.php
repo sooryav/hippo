@@ -55,15 +55,15 @@ class Router
         // Load the controller file.
         require_once($filePath);
 
-	$controllerClassName = '\\Controller\\' . $controllerName;
+        $controllerClassName = '\\Controller\\' . $controllerName;
         $controller = new $controllerClassName($requestUrl);
         $controller->execute($inputs); 
     }	
 
     private function getControllerSubDir($controllerDir, $requestUrl)
     {
-        // The implode/explode operations below just strips the "Identifier"
-        // and constructs the "subDir". For example, 
+        // The implode/explode operations below just strip the "Identifier"
+        // and construct the "subDir". For example, 
         // $requestUrl = /example => "",
         // $requestUrl = /example/foo => "foo",
         // $requestUrl = /example/foo/bar => "foo/bar",
