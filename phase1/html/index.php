@@ -1,7 +1,7 @@
 <?php
 
-require_once('../core/Router.php');
-require_once('../config/RouteMap.php');
+require_once(__DIR__ .'/../core/Router.php');
+require_once(__DIR__ .'/../config/RouteMap.php');
 
 define('ROOT_DIR', realpath(dirname(__FILE__)) .'/');
 
@@ -24,7 +24,7 @@ catch (Exception $e)
     $router->route(
         $controllerDir,
         '/error',
-        [ 'message' => $e->getMessage() ]);
+        array( 'message' => $e->getMessage() ));
 }
 
 ?>

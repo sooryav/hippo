@@ -1,7 +1,7 @@
 <?hh
 
-require_once('XPageView.php');
-require_once('lib/composer/vendor/autoload.php');
+require_once(__DIR__ . '/XPageView.php');
+require_once(__DIR__ . '/lib/composer/vendor/autoload.php');
 
 class :sample:xhp:view extends :x:page:view {
 
