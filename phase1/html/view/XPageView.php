@@ -1,6 +1,6 @@
 <?hh
 
-require_once('/var/www/vendor/autoload.php');
+require_once('lib/composer/vendor/autoload.php');
 
 abstract class XPageView {
 

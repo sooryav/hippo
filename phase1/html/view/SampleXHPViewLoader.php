@@ -1,9 +1,10 @@
 <?hh
 
 require_once('XPageView.php');
-require_once('/var/www/vendor/autoload.php');
+//require_once('/var/www/hippo/phase1/html/view/lib/composer/vendor/autoload.php');
+require_once('lib/composer/vendor/autoload.php');
 
-class SampleXHPView extends XPageView {
+class SampleXHPViewLoader extends XPageView {
 
   public function getBody() {
     return
@@ -26,5 +27,5 @@ class SampleXHPView extends XPageView {
 
 }
 
-$s = new SampleXHPView();
+$s = new SampleXHPViewLoader();
 echo $s->render();
