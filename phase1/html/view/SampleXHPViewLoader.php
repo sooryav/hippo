@@ -3,7 +3,7 @@
 require_once('XPageView.php');
 require_once('lib/composer/vendor/autoload.php');
 
-class SampleXHPViewLoader extends XPageView {
+class :sample:xhp:view extends :x:page:view {
 
   public function getBody() {
     return
@@ -26,5 +26,4 @@ class SampleXHPViewLoader extends XPageView {
 
 }
 
-$s = new SampleXHPViewLoader();
-echo $s->render();
+echo <sample:xhp:view />;

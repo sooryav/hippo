@@ -3,7 +3,7 @@
 require_once('XPageView.php');
 require_once('lib/composer/vendor/autoload.php');
 
-class SampleXHPView extends XPageView {
+class :sample:xhp:view extends :x:page:view {
 
   public function getBody() {
     return

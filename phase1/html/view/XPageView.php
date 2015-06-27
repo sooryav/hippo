@@ -2,7 +2,7 @@
 
 require_once('lib/composer/vendor/autoload.php');
 
-abstract class XPageView {
+abstract class :x:page:view extends :x:element {
 
   const string BOOTSTRAP_CSS_CDN =
     "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css";
