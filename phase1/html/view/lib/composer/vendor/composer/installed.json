@@ -1,0 +1,146 @@
+[
+    {
+        "name": "facebook/xhp-lib",
+        "version": "2.2.0",
+        "version_normalized": "2.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/facebook/xhp-lib.git",
+            "reference": "45e4542d0fcaa3dfe39bf33e81ec4e1ff520b0a6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/45e4542d0fcaa3dfe39bf33e81ec4e1ff520b0a6",
+            "reference": "45e4542d0fcaa3dfe39bf33e81ec4e1ff520b0a6",
+            "shasum": ""
+        },
+        "require": {
+            "hhvm": "*"
+        },
+        "require-dev": {
+            "91carriage/phpunit-hhi": "4.5.*",
+            "phpunit/phpunit": "4.5.*"
+        },
+        "time": "2015-05-14 21:47:55",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "Class library for XHP",
+        "homepage": "https://github.com/facebook/xhp-lib",
+        "keywords": [
+            "facebook",
+            "hack",
+            "hhvm",
+            "xhp"
+        ]
+    },
+    {
+        "name": "hhvm/xhp-bootstrap",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/hhvm/xhp-bootstrap.git",
+            "reference": "c4093e6e71fb8d49ce94bd414d0fe9d95d78550f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/hhvm/xhp-bootstrap/zipball/c4093e6e71fb8d49ce94bd414d0fe9d95d78550f",
+            "reference": "c4093e6e71fb8d49ce94bd414d0fe9d95d78550f",
+            "shasum": ""
+        },
+        "require": {
+            "facebook/xhp-lib": "~2.2.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~3.5"
+        },
+        "time": "2015-05-26 21:33:54",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "Use Bootstrap with XHP",
+        "homepage": "https://github.com/hhvm/xhp-bootstrap",
+        "keywords": [
+            "bootstrap",
+            "facebook",
+            "hack",
+            "hhvm",
+            "xhp"
+        ]
+    },
+    {
+        "name": "twbs/bootstrap",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/twbs/bootstrap.git",
+            "reference": "1b745460784b83937ebca491bc8cb072a8bbbc9b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/1b745460784b83937ebca491bc8cb072a8bbbc9b",
+            "reference": "1b745460784b83937ebca491bc8cb072a8bbbc9b",
+            "shasum": ""
+        },
+        "replace": {
+            "twitter/bootstrap": "self.version"
+        },
+        "time": "2015-06-21 08:42:23",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.3.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jacob Thornton",
+                "email": "jacobthornton@gmail.com"
+            },
+            {
+                "name": "Mark Otto",
+                "email": "markdotto@gmail.com"
+            }
+        ],
+        "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+        "homepage": "http://getbootstrap.com",
+        "keywords": [
+            "JS",
+            "css",
+            "framework",
+            "front-end",
+            "less",
+            "mobile-first",
+            "responsive",
+            "web"
+        ]
+    }
+]
