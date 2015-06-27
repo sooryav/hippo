@@ -1,7 +1,6 @@
 <?hh
 
 require_once('XPageView.php');
-//require_once('/var/www/hippo/phase1/html/view/lib/composer/vendor/autoload.php');
 require_once('lib/composer/vendor/autoload.php');
 
 class SampleXHPViewLoader extends XPageView {
