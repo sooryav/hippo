@@ -17,7 +17,8 @@ abstract class ControllerBase implements IController {
 
   public abstract function execute(Map<string, mixed> $inputs): void;
 
-  protected function render(string $content): void {
+  // TODO: confirm if the type of $content is correct.
+  protected function render(:x:element $content): void {
     echo $content;
   }
 }

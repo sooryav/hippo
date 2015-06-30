@@ -11,7 +11,7 @@ abstract class :x:page:view extends :x:element {
   const string BOOTSTRAP_JS_CDN =
       "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js";
 
-  public function render() {
+  public function render(): xhp_html {
     return
       <html>
         <head>
@@ -32,7 +32,7 @@ abstract class :x:page:view extends :x:element {
      </html>;
   }
 
-  protected function getBody() {
+  protected function getBody(): :x:frag {
     return <x:frag/>;
   }
 

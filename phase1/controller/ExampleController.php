@@ -15,10 +15,11 @@ class ExampleController extends ControllerBase {
 
   <<Override>>
   public function execute(Map<string, mixed> $inputs): void {
+    // The following is just an example to invoke model class.
+    // There is no relationship b/w model and view in this example.
     (new \Model\ExampleModel())->getData($inputs);
   
-    // TODO: Not sure how to call parent::render();
-    echo <sample:xhp:view />;
+    $this->render(<sample:xhp:view />);
   }
 
 }
