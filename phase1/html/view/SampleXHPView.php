@@ -5,7 +5,7 @@ require_once(__DIR__ . '/lib/composer/vendor/autoload.php');
 
 class :sample:xhp:view extends :x:page:view {
 
-  public function getBody() {
+  <<Override>> public function getBody() {
     return
       <x:frag>
         <bootstrap:alert use="success">

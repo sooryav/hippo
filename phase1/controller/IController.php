@@ -1,18 +1,15 @@
-<?php
+<?hh
 
 namespace Controller;
 
 // Defines the interface for controllers.
-interface IController
-{
-    // Returns the name of the controller.
-    public function getName();
+interface IController {
 
-    // Returns the path for which the controller is invoked.
-    public function getPath();
+  // Returns the name of the controller.
+  public function getName(): string;
 
-    // Executes the controller logic with given inputs.
-    public function execute(array $inputs);
+  // Executes the controller logic with given inputs.
+  public function execute(Map<string, mixed> $inputs): void;
+
 }
 
-?>
