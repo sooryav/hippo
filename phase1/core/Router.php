@@ -6,18 +6,13 @@ namespace Core;
 // the corresponding controller.
 // It expects the routing mapping as follows:
 // $routerMap = [
-//     "/Identifier[/subDirs]" => "ControllerClass name",
+//     "/reqeustUrl" => "ControllerClass name",
 //     ...
 // ];
 // 
 // For example, if you have the following:
 //    "/example" => "Controller1",
-// it will load \Controller\Controller1 class from
-// CONTROLLER_DIR/Controller1.php file where CONTROLLER_DIR is the base
-// directory of controller files.
-// If you have the following:
-//    "/example/foo" => "bar",
-// it will load \Controller\bar class from CONTROLLER_DIR/foo/bar.php file.
+// it will load \Controller\Controller1 class.
 // Note that all the string comparions are case-sensitive.
 class Router {
 
@@ -27,15 +22,17 @@ class Router {
   }
 
   // $controllerDir: the base directory where the controller php files exist.
+  //   TODO: Controllers will be loaded using autoload, thus this field
+  //         will be deprecated once autoload is implemented.
   // $requestUrl: the request URI without the query string.
-  //     If the original request URI was /foo/?bar=1,
-  //     the $requestUrl passed in should be /foo.
-  //     Note that it is the key to the $routeMap (case-sensitive).
-  // $inputs: input data array (such as from $_GET or $_POST).
+  //   If the original request URI was /foo/?bar=1,
+  //   the $requestUrl passed in should be /foo.
+  //   Note that it is the key to the $routeMap (case-sensitive).
+  // $requestParams: request parameters (such as from $_GET or $_POST).
   public function route(
     string $controllerDir,
     string $requestUrl,
-    Map<string, mixed> $inputs) {
+    Map<string, mixed> $requestParams) {
 
     if (!array_key_exists($requestUrl, $this->routeMap)) {
       throw new \Exception("The route [$requestUrl] is unknown.");
@@ -43,8 +40,7 @@ class Router {
 
     // The controller file we will be loading.
     $controllerName = $this->routeMap[$requestUrl];
-    $filePath = $this->getControllerSubDir($controllerDir, $requestUrl)
-      . "$controllerName.php";
+    $filePath = "$controllerDir/$controllerName.php";
 
     if (!file_exists($filePath)) {
       throw new \Exception("The contoller file [$filePath] does not exist."); 
@@ -54,19 +50,16 @@ class Router {
     require_once($filePath);
 
     $controllerClassName = '\\Controller\\' . $controllerName;
-    (new $controllerClassName($requestUrl))->execute($inputs);
-  }	
+    $controller = new $controllerClassName($requestUrl);
 
-  private function getControllerSubDir($controllerDir, $requestUrl) {
-    // The implode/explode operations below just strip the "Identifier"
-    // and construct the "subDir". For example, 
-    // $requestUrl = /example => "",
-    // $requestUrl = /example/foo => "foo",
-    // $requestUrl = /example/foo/bar => "foo/bar",
-    return "$controllerDir/"
-      . implode('/', array_slice(explode('/', $requestUrl), 2))
-      . "/";
-  }
+    // Validate the controller's path is same as the one specified
+    // in the $routeMap.
+    if ($requestUrl != $controller->getPath()) {
+      throw new \Exception("Route map is out of sync for $requestUrl.");
+    }
+   
+    $controller->execute($requestParams);
+  }	
 
 }
 
