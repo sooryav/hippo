@@ -2,11 +2,11 @@
 
 namespace Controller;
 
-require_once(__DIR__ . '/IController.php');
+require_once(__DIR__ . '/ControllerInterface.php');
 
 // ControllerBase implements IController interface and
 // provides common functionalities.
-abstract class ControllerBase implements IController {
+abstract class ControllerBase implements ControllerInterface {
 
   protected function __construct(
     private string $name,

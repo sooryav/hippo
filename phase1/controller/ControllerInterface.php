@@ -3,7 +3,7 @@
 namespace Controller;
 
 // Defines the interface for controllers.
-interface IController {
+interface ControllerInterface {
 
   // Returns the name of the controller.
   public function getName(): string;
