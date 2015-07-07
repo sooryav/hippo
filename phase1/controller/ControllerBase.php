@@ -9,16 +9,16 @@ require_once(__DIR__ . '/ControllerInterface.php');
 abstract class ControllerBase implements ControllerInterface {
 
   protected function __construct(
-    private string $name,
-    private string $path) {
+    private string $m_name,
+    private string $m_path) {
   }
 
   public function getName(): string {
-    return $this->name;
+    return $this->m_name;
   }
 
   public function getPath(): string {
-    return $this->path;
+    return $this->m_path;
   }
 
   public abstract function execute(Map<string, mixed> $inputs): void;

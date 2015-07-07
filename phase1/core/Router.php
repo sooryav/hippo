@@ -18,7 +18,7 @@ class Router {
 
   // Router class constructor that takes route map as an input.
   public function __construct(
-    private Map<string, string> $routeMap) {
+    private Map<string, string> $m_routeMap) {
   }
 
   // $controllerDir: the base directory where the controller php files exist.
@@ -27,19 +27,19 @@ class Router {
   // $requestUrl: the request URI without the query string.
   //   If the original request URI was /foo/?bar=1,
   //   the $requestUrl passed in should be /foo.
-  //   Note that it is the key to the $routeMap (case-sensitive).
+  //   Note that it is the key to the $m_routeMap (case-sensitive).
   // $requestParams: request parameters (such as from $_GET or $_POST).
   public function route(
     string $controllerDir,
     string $requestUrl,
     Map<string, mixed> $requestParams) {
 
-    if (!array_key_exists($requestUrl, $this->routeMap)) {
+    if (!array_key_exists($requestUrl, $this->m_routeMap)) {
       throw new \Exception("The route [$requestUrl] is unknown.");
     }
 
     // The controller file we will be loading.
-    $controllerName = $this->routeMap[$requestUrl];
+    $controllerName = $this->m_routeMap[$requestUrl];
     $filePath = "$controllerDir/$controllerName.php";
 
     if (!file_exists($filePath)) {
@@ -53,7 +53,7 @@ class Router {
     $controller = new $controllerClassName($requestUrl);
 
     // Validate the controller's path is same as the one specified
-    // in the $routeMap.
+    // in the $m_routeMap.
     if ($requestUrl != $controller->getPath()) {
       throw new \Exception("Route map is out of sync for $requestUrl.");
     }
