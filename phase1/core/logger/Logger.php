@@ -47,11 +47,3 @@ class Logger implements LoggerInterface {
 
 }
 
-// Test script. This will be moved out from here soon. :)
-$logger= new \Core\Logger(
-  'mylog',
-   Vector<Monolog\Handler\HandlerInterface> {});
-
-$logger->error("Hello Log!");
-$logger->info("Hello Log!");
-$logger->warning("Hello Log!");
