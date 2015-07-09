@@ -53,7 +53,7 @@ class Application {
 
     return new Request(
       rtrim(strtok($request_url, '?'), "/"),
-      Map<string, mixed>{});
+      new Map<string, mixed>($_REQUEST));
   }
 }
 
