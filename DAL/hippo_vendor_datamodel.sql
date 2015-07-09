@@ -17,10 +17,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
+-- Drop DB (Test Mode only)
+--
+DROP DATABASE IF EXISTS Hippo;
+
+---------------------------------------------------------
+
+--
 -- Database: `hippo`
 --
+CREATE database IF NOT EXISTS Hippo;
 
 -- --------------------------------------------------------
+
+--
+-- Use Hippo DB
+--
+USE Hippo;
+
+-----------------------------------------------------------
 
 --
 -- Table structure for table `contact`
@@ -215,34 +230,6 @@ INSERT INTO `providetype` (`ProviderTypeId`, `ProviderType`) VALUES
 (2, 'Restaurant');
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `vendor`
---
-
-CREATE TABLE IF NOT EXISTS `vendor` (
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `business_name` varchar(100) DEFAULT NULL,
-  `email` varchar(60) DEFAULT NULL,
-  `address1` varchar(60) DEFAULT NULL,
-  `address2` varchar(60) DEFAULT NULL,
-  `city` varchar(40) DEFAULT NULL,
-  `state` varchar(40) DEFAULT NULL,
-  `zip` int(10) unsigned NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `category_id` smallint(6) DEFAULT NULL,
-  `vendor_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`vendor_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `vendor`
---
-
-INSERT INTO `vendor` (`first_name`, `last_name`, `business_name`, `email`, `address1`, `address2`, `city`, `state`, `zip`, `phone`, `category_id`, `vendor_id`) VALUES
-('Atul', 'Gupta', 'Pani Poori Inc', 'atulgupta101@yahoo.com', '420 Roop Mahal', '', 'Kirkland', 'WA', 98034, '9709804003', 1, 1),
-('Soorya', 'Tanikela', 'Chole Bhature Inc', 'soorya@soorya.com', '123 Some Address', '', 'Redmond', 'WA', 98052, '1234567890', 1, 2);
 
 --
 -- Constraints for dumped tables
