@@ -2,6 +2,8 @@
 
 namespace Core;
 
+require_once(__DIR__ . '/Context.php');
+
 // Router class is responsible for routing the given request to
 // the corresponding controller.
 // It expects the routing mapping as follows:
@@ -31,9 +33,11 @@ class Router {
   // $requestParams: request parameters (such as from $_GET or $_POST).
   public function route(
     string $controllerDir,
-    string $requestUrl,
-    Map<string, mixed> $requestParams) {
+    Context $context) {
 
+    $request = $context->m_request;
+    $requestUrl = $request->m_url;
+   
     if (!array_key_exists($requestUrl, $this->m_routeMap)) {
       throw new \Exception("The route [$requestUrl] is unknown.");
     }
@@ -55,10 +59,10 @@ class Router {
     // Validate the controller's path is same as the one specified
     // in the $m_routeMap.
     if ($requestUrl != $controller->getPath()) {
-      throw new \Exception("Route map is out of sync for $requestUrl.");
+      throw new \Exception("Route map is invalid for $requestUrl.");
     }
    
-    $controller->execute($requestParams);
+    $controller->execute($request->m_params);
   }	
 
 }
