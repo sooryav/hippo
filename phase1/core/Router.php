@@ -3,6 +3,7 @@
 namespace Core;
 
 require_once(__DIR__ . '/Context.php');
+require_once(__DIR__ . '/Request.php');
 
 // Router class is responsible for routing the given request to
 // the corresponding controller.
@@ -26,16 +27,13 @@ class Router {
   // $controllerDir: the base directory where the controller php files exist.
   //   TODO: Controllers will be loaded using autoload, thus this field
   //         will be deprecated once autoload is implemented.
-  // $requestUrl: the request URI without the query string.
-  //   If the original request URI was /foo/?bar=1,
-  //   the $requestUrl passed in should be /foo.
-  //   Note that it is the key to the $m_routeMap (case-sensitive).
-  // $requestParams: request parameters (such as from $_GET or $_POST).
+  // $context: Context object for this request.
+  // $request: Request object that captures request information.
   public function route(
     string $controllerDir,
-    Context $context) {
+    Context $context,
+    Request $request) {
 
-    $request = $context->m_request;
     $requestUrl = $request->m_url;
    
     if (!array_key_exists($requestUrl, $this->m_routeMap)) {

@@ -3,19 +3,22 @@
 namespace Tests\CoreTests;
 
 require_once(__DIR__ . '/../../core/Router.php');
+require_once(__DIR__ . '/../mock/MockLogger.php');
 
 class RouterTest extends \PHPUnit_Framework_TestCase {
 
   public function testRouterWithUnknownKey() {
     $router = new \Core\Router(Map<string, string>{});
+    $context = new \Core\Context(new \Tests\Mock\MockLogger());
+    $request = new \Core\Request("foo", Map<string, mixed>{});
 
     try {
-      $router->route(__DIR__, "unknwon", Map<string, mixed>{});
+      $router->route(__DIR__, $context, $request);
       $this->fail("Router is expected to throw an exception.");
     }
     catch (\Exception $e) {
       $this->assertEquals(
-        "The route [unknwon] is unknown.",
+        "The route [foo] is unknown.",
 	$e->getMessage());
     }
   }
