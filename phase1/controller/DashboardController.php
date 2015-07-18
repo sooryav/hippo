@@ -14,11 +14,11 @@ class DashboardController extends ControllerBase {
   }
 
   <<Override>>
-  public function execute(Map<string, mixed> $inputs): void {
+  public function execute(\Core\Context $context): void {
     // The following controller connects to Provider's dashboard model class.
     // There is no relationship b/w model and view in this example.
 
-    (new \model\DashboardModel())->getData($inputs);
+    (new \model\DashboardModel())->getData($context->m_request->m_params);
   
     $view = <sample:xhp:view />;
     $this->render($view->toString()); 
