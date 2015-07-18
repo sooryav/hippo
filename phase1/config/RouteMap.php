@@ -9,6 +9,8 @@ class RouteMap
 public static ImmMap<string, string> $s_map = ImmMap {
     '/example' => 'ExampleController',
 
+    '/dashboard' => 'DashboardController',
+
     '/error' => 'ErrorController'
 };
 
