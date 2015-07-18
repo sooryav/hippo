@@ -3,7 +3,6 @@
 namespace Core;
 
 require_once(__DIR__ . '/Context.php');
-require_once(__DIR__ . '/Request.php');
 
 // Router class is responsible for routing the given request to
 // the corresponding controller.
@@ -21,7 +20,7 @@ class Router {
 
   // Router class constructor that takes route map as an input.
   public function __construct(
-    private Map<string, string> $m_routeMap) {
+    private ImmMap<string, string> $m_routeMap) {
   }
 
   // $controllerDir: the base directory where the controller php files exist.
@@ -31,9 +30,9 @@ class Router {
   // $request: Request object that captures request information.
   public function route(
     string $controllerDir,
-    Context $context,
-    Request $request) {
+    Context $context) {
 
+    $request = $context->m_request;
     $requestUrl = $request->m_url;
    
     if (!array_key_exists($requestUrl, $this->m_routeMap)) {
@@ -60,7 +59,7 @@ class Router {
       throw new \Exception("Route map is invalid for $requestUrl.");
     }
    
-    $controller->execute($request->m_params);
+    $controller->execute($context);
   }	
 
 }

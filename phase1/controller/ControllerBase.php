@@ -21,7 +21,7 @@ abstract class ControllerBase implements ControllerInterface {
     return $this->m_path;
   }
 
-  public abstract function execute(Map<string, mixed> $inputs): void;
+  public abstract function execute(\Core\Context $context): void;
 
   protected function render(string $content): void {
     echo $content;

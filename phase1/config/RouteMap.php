@@ -6,10 +6,10 @@ class RouteMap
 {
 
 // Defines the routing mapping from the request URI to the controller.
-public static $s_map = Map<string, string> {
-    "/example" => "ExampleController",
+public static ImmMap<string, string> $s_map = ImmMap {
+    '/example' => 'ExampleController',
 
-    "/error" => "ErrorController"
+    '/error' => 'ErrorController'
 };
 
 }

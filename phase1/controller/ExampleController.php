@@ -13,10 +13,10 @@ class ExampleController extends ControllerBase {
   }
 
   <<Override>>
-  public function execute(Map<string, mixed> $inputs): void {
+  public function execute(\Core\Context $context): void {
     // The following is just an example to invoke model class.
     // There is no relationship b/w model and view in this example.
-    (new \Model\ExampleModel())->getData($inputs);
+    (new \Model\ExampleModel())->getData($context->m_request->m_params);
   
     $view = <sample:xhp:view />;
     $this->render($view->toString());

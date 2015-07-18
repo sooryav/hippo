@@ -10,11 +10,14 @@ class ErrorController extends ControllerBase {
     parent::__construct(get_class($this), '/error');
   }
 
-  public function execute(Map<string, mixed> $inputs) {
+  <<Override>>
+  public function execute(\Core\Context $context): void {
+    $params = $context->m_request->m_params;
+
     echo "<HTML>\n"
       . "<HEAD><Title>Error Page</TITLE></HEAD>\n"
       . "<BODY>\n"
-      . "<p>" . $inputs['message'] . "</p>"
+      . "<p>" . (string)$params['message'] . "</p>"
       . "</BODY>\n"
       . "</HTML>\n";
   }

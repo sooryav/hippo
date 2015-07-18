@@ -2,7 +2,6 @@
 
 require_once(__DIR__ . '/../core/Context.php');
 require_once(__DIR__ . '/../core/logger/LoggerFactory.php');
-require_once(__DIR__ . '/../core/Request.php');
 require_once(__DIR__ . '/../core/Router.php');
 require_once(__DIR__ . '/../config/RouteMap.php');
 
@@ -19,7 +18,7 @@ class Application {
 
   public function main(): void {
     $context = $this->createContext();  
-    $request = $this->createRequest();
+    $request = $context->m_request;
 
     // Just an example how the logging can be done.
     $context->m_logger->info("Request url is $request->m_url.");
@@ -29,20 +28,21 @@ class Application {
     $controllerDir = __DIR__ . '/../controller';
 
     try {
-      $router->route($controllerDir, $context, $request);
+      $router->route($controllerDir, $context);
     }
     catch (Exception $e) {
       $request->m_url = '/error';
       $request->m_params =
-        Map<string, mixed>{'message' => $e->getMessage()};
+        Map{ 'message' => $e->getMessage() };
 
-      $router->route($controllerDir, $context, $request);
+      $router->route($controllerDir, $context);
     }
   }
 
   private function createContext(): Context {
     return new Context(
-      (new LoggerFactory())->create('log'));
+      (new LoggerFactory())->create('log'),
+      $this->createRequest());
   }
 
   private function createRequest(): Request {
@@ -54,10 +54,10 @@ class Application {
 
     return new Request(
       rtrim(strtok($request_url, '?'), "/"),
-      new Map<string, mixed>($_REQUEST));
+      new Map($_REQUEST));
   }
 }
 
 
 // The main driver of the application.
-(new Application(new Map<int, string>($argv)))->main();
+(new Application(new Map($argv)))->main();
