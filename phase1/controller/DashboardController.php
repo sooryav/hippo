@@ -6,7 +6,6 @@ require_once(__DIR__ . '/ControllerBase.php');
 require_once(__DIR__ . '/../model/DashboardModel.php');
 require_once(__DIR__ . '/../html/view/SampleXHPView.php');
 require_once(__DIR__ . '/../html/view/DashboardView.php');
-require_once(__DIR__ . '/../html/view/DashboardView2.php');
 
 class DashboardController extends ControllerBase {
 
@@ -19,9 +18,9 @@ class DashboardController extends ControllerBase {
     // The following controller connects to Provider's dashboard model class.
     // There is no relationship b/w model and view in this example.
 
-    (new \Model\DashboardModel())->getData($context->m_request->m_params);
+    $provider = (new \Model\DashboardModel())->getData($context->m_request->m_params);
   
-    $view = <Dashboard2:xhp:view />;
+    $view = <Dashboard:xhp:view provider={$provider}/>;
     $this->render($view->toString()); 
   }
 
