@@ -142,4 +142,7 @@ sudo php artisan migrate:rollback
 sudo php artisan migrate
 
 
+vim commands
+http://nvie.com/posts/how-i-boosted-my-vim/
+
 
