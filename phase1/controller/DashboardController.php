@@ -18,7 +18,7 @@ class DashboardController extends ControllerBase {
     // The following controller connects to Provider's dashboard model class.
     // There is no relationship b/w model and view in this example.
 
-    (new \model\DashboardModel())->getData($context->m_request->m_params);
+    (new \Model\DashboardModel())->getData($context->m_request->m_params);
   
     $view = <sample:xhp:view />;
     $this->render($view->toString()); 
