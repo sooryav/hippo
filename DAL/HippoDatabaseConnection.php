@@ -1,4 +1,4 @@
-<?php
+<?hh
 
 namespace DataAccessLayer;
 
@@ -34,4 +34,3 @@ class DatabaseConnection
         
 }
 
-?>

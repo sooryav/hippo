@@ -5,7 +5,8 @@ namespace Controller;
 require_once(__DIR__ . '/ControllerBase.php');
 require_once(__DIR__ . '/../model/DashboardModel.php');
 require_once(__DIR__ . '/../html/view/SampleXHPView.php');
-#require_once(__DIR__ . '/../html/view/ProviderDashboardView.php');
+require_once(__DIR__ . '/../html/view/DashboardView.php');
+require_once(__DIR__ . '/../html/view/DashboardView2.php');
 
 class DashboardController extends ControllerBase {
 
@@ -20,7 +21,7 @@ class DashboardController extends ControllerBase {
 
     (new \Model\DashboardModel())->getData($context->m_request->m_params);
   
-    $view = <sample:xhp:view />;
+    $view = <Dashboard2:xhp:view />;
     $this->render($view->toString()); 
   }
 
