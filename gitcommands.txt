@@ -13,3 +13,10 @@ git push origin HEAD:master
 git checkout -b <new branch> [origin/master]
 
 git clone https://github.com/sooryav/hippo
+
+// undo a commit - below command removed all the files in commit for me
+// newly added files were left out
+git reset HEAD path/to/unwanted_file
+
+// commonly used command for uncommit
+git reset --soft HEAD^
