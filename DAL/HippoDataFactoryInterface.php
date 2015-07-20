@@ -11,9 +11,14 @@
 
 namespace DataAccessLayer;
 
-interface IHippoDataFactory
+interface IDataConnectionFactory
 {
     public function GetSharedConnection();
     public function CreateConnection();
+};
+
+interface IDataConnection
+{
+	public function GetDataContext();
 };
 
