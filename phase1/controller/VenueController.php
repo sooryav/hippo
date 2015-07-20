@@ -5,6 +5,7 @@ namespace Controller;
 require_once(__DIR__ . '/ControllerBase.php');
 require_once(__DIR__ . '/../model/VenueModel.php');
 require_once(__DIR__ . '/../html/view/VenueView.php');
+require_once(__DIR__ . '/../html/ui/VenueListElement.php');
 
 class VenueController extends ControllerBase {
 
@@ -14,29 +15,30 @@ class VenueController extends ControllerBase {
 
   <<Override>>
   public function execute(\Core\Context $context): void {
-    // TODO: this function is not finished and will be cleaned up.
     $params = $context->m_request->m_params;
+    $venueModel = new \Model\VenueModel();
+    $view = null;
+
+    // The first time this page is being loaded.
     if (!isset($params['page']))
     { 
-      // TODO: create the totalVenuesCount function in the view.
-      $view = <ui:venues:view totalVenuesCount={5}/>;
-      $this->render($view->toString());
+      $view =
+        <ui:venues:view
+          totalVenuesCount={$venueModel->getTotalVenuesCount()}/>;
     }
+    // The request is AJAX call to get venues information.
     else
     {
-      $venues = (new \Model\VenueModel())->getVenues();
+      $curPage = $params['page']; 
 
-      // TODO: Create a xhp class for this venue-list.
-      $root = <ul />;
-      foreach ($venues as $venue) {
-      $root->appendChild(
-        <li>
-          {$venue->m_name . ': ' . $venue->m_zip}
-        </li>);
-      }
-
-      $this->render($root->toString());
+      $view =
+        <ui:venue-list
+          venues={$venueModel->getVenues()}
+          id="venuesContainer"
+          createContainer={$curPage == 0} />;
     }
+
+    $this->render($view->toString());
   }
 }
 
