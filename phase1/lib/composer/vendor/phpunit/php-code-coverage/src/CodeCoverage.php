@@ -75,6 +75,11 @@ class PHP_CodeCoverage
     private $ignoredLines = array();
 
     /**
+     * @var bool
+     */
+    private $disableIgnoredLines = false;
+
+    /**
      * Test data.
      *
      * @var array
@@ -93,13 +98,11 @@ class PHP_CodeCoverage
         if ($driver === null) {
             $runtime = new Runtime;
 
-            if ($runtime->isHHVM()) {
-                $driver = new PHP_CodeCoverage_Driver_HHVM;
-            } elseif ($runtime->hasXdebug()) {
-                $driver = new PHP_CodeCoverage_Driver_Xdebug;
-            } else {
+            if (!$runtime->hasXdebug()) {
                 throw new PHP_CodeCoverage_Exception('No code coverage driver available');
             }
+
+            $driver = new PHP_CodeCoverage_Driver_Xdebug;
         }
 
         if ($filter === null) {
@@ -483,6 +486,22 @@ class PHP_CodeCoverage
     }
 
     /**
+     * @param  bool                       $flag
+     * @throws PHP_CodeCoverage_Exception
+     */
+    public function setDisableIgnoredLines($flag)
+    {
+        if (!is_bool($flag)) {
+            throw PHP_CodeCoverage_Util_InvalidArgumentHelper::factory(
+                1,
+                'boolean'
+            );
+        }
+
+        $this->disableIgnoredLines = $flag;
+    }
+
+    /**
      * Applies the @covers annotation filtering.
      *
      * @param  array                                                 $data
@@ -657,6 +676,10 @@ class PHP_CodeCoverage
             $lines                         = file($filename);
             $numLines                      = count($lines);
 
+            if ($this->disableIgnoredLines) {
+                return $this->ignoredLines[$filename];
+            }
+
             foreach ($lines as $index => $line) {
                 if (!trim($line)) {
                     $this->ignoredLines[$filename][] = $index + 1;
@@ -721,7 +744,7 @@ class PHP_CodeCoverage
 
                         $this->ignoredLines[$filename][] = $token->getLine();
 
-                        if (strpos($docblock, '@codeCoverageIgnore')) {
+                        if (strpos($docblock, '@codeCoverageIgnore') || strpos($docblock, '@deprecated')) {
                             $endLine = $token->getEndLine();
 
                             for ($i = $token->getLine(); $i <= $endLine; $i++) {
