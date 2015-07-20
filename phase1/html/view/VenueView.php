@@ -1,7 +1,7 @@
 <?hh
 
 require_once(__DIR__ . '/XPageView.php');
-require_once(__DIR__ . '/lib/composer/vendor/autoload.php');
+require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 
 class :ui:venues:view extends :x:page:view {
 

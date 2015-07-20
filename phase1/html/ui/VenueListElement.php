@@ -1,6 +1,6 @@
 <?hh
 
-require_once(__DIR__ . '/../view/lib/composer/vendor/autoload.php');
+require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 require_once(__DIR__ . '/../../entity/Venue.php');
 
 use Entity\Venue;
