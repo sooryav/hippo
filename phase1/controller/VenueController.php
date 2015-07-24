@@ -9,13 +9,13 @@ require_once(__DIR__ . '/../html/ui/VenueListElement.php');
 
 class VenueController extends ControllerBase {
 
-  public function __construct() {
-    parent::__construct(get_class($this), '/venues');
+  public function __construct(\Core\Context $context, Map<string, string> $inputs) {
+    parent::__construct(get_class($this), '/venues', $context, $inputs);
   }
 
   <<Override>>
-  public function execute(\Core\Context $context): void {
-    $params = $context->m_request->m_params;
+  public function render(): :x:element {
+    $params = $this->getContext()->m_request->m_params;
     $venueModel = new \Model\VenueModel();
     $view = null;
 
@@ -37,8 +37,8 @@ class VenueController extends ControllerBase {
           id="venuesContainer"
           createContainer={$curPage == 0} />;
     }
+    return $view;
 
-    $this->render($view->toString());
   }
 }
 
