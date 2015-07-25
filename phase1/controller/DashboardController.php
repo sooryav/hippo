@@ -9,19 +9,27 @@ require_once(__DIR__ . '/../html/view/DashboardView.php');
 
 class DashboardController extends ControllerBase {
 
-  public function __construct() {
-    parent::__construct(get_class($this), '/dashboard');
+  public function __construct(\Core\Context $context, Map<string, string> $inputs) {
+    parent::__construct(get_class($this), '/dashboard', $context, $inputs);
   }
 
   <<Override>>
-  public function execute(\Core\Context $context): void {
+  public function render(): :x:element {
     // The following controller connects to Provider's dashboard model class.
-    // There is no relationship b/w model and view in this example.
 
-    $provider = (new \Model\DashboardModel())->getData($context->m_request->m_params);
+    $context = $this->getContext();
+    if (isset($context->m_request->m_params['GetProfile'])) {
+
+      $provider = (new \Model\DashboardModel())->getProfile($context->m_request->m_params);
   
-    $view = <Dashboard:xhp:view provider={$provider}/>;
-    $this->render($view->toString()); 
+      return <ui:Dashboard provider={$provider} />;
+      //$jsonRequest = json_encode($context->m_request->m_params);
+      //echo $jsonRequest;
+    } else {
+      return <ui:TopNav />;
+      //$jsonRequest = json_encode($context->m_request->m_params);
+      //echo $jsonRequest;
+    }
   }
 
 }

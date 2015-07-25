@@ -3,16 +3,91 @@
 require_once(__DIR__ . '/XPageView.php');
 require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 require_once(__DIR__ . '/../../entity/Provider.php');
-require_once(__DIR__ . '/../../entity/Address.php');
 
 use Entity\Provider;
-use Entity\Address;
 
-class :Dashboard:xhp:view extends :x:page:view {
-  attribute Entity\Provider provider @required;
+class :ui:Dashboard extends :x:page:view {
+
+  attribute Provider provider @required;
+
+  private function getTable(): :x:frag {
+    $frag = <x:frag />;
+
+    $provider = $this->getAttribute('provider');
+    $firstName = $provider->m_firstName;
+    $lastName = $provider->m_lastName;
+
+    $table =  
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+           </tr>
+          </thead>
+          <tbody>
+            <tr><td>{$firstName}</td><td>{$lastName}</td></tr>
+          </tbody>
+        </table>
+        </div>;
+
+    $frag->appendChild($table);
+    return $frag;
+  }
+
+  <<Override>>
+  public function getBody(): :x:frag {
+
+    $frag = <x:frag />;
+
+    $table = $this->getTable();
+    $frag->appendChild($table);
+
+
+    return $frag;
+  }
+
+}
+
+class :ui:TopNav extends :x:page:view {
+
+  <<Override>>
+  public function getBody(): :x:frag {
+    //$nav = $this->getNavbar();
+    $navRaw = $this->getNavbarRaw();
+
+    $button = $this->getButton();
+
+    $frag = <x:frag />;
+    //$frag->appendChild($nav);
+    $frag->appendChild($navRaw);
+    //$frag->appendChild($button);
+
+    //$table = $this->getTable();
+    //$frag->appendChild($table);
+
+
+    return $frag;
+  }
+
+  private function getButton(): XHPRoot {
+    $frag = <x:frag />;
+
+    $button = 
+      <form action="" method="post">
+        <label>SEARCH...</label>
+        <input type="text" name="name_entered" id="name" /><br></br>
+        <input name="submitbutton" type="submit" value="Submit" />
+      </form>;
+
+    $frag->appendChild($button);
+
+    return $frag;
+  }
 
   // This will most likely move to some generic view later
-  private function getNavbar() : XHPRoot {
+  private function getNavbar(): XHPRoot {
 
     $nav = <nav class="navbar navbar-inverse navbar-fixed-top" />;
       $div1 = <div class="container-fluid" />;
@@ -54,40 +129,36 @@ class :Dashboard:xhp:view extends :x:page:view {
     return $nav;
   }
 
-  <<Override>>
-  public function getBody(): :x:frag {
+  private function getNavbarRaw(): XHPRoot {
+    $nav = 
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#">Help</a></li>
+            </ul>
+            <form action="/dashboard" class="navbar-right" method="get">
+              <input type="submit" name="GetProfile" value="Profile" />
+            </form>
+            <form action="/dashboard" class="navbar-form navbar-right" method="post">
+              <input type="text" name="SearchTab" class="form-control" placeholder="Search..." />
+            </form>
+          </div>
+        </div>
+        </nav>;
 
-    $nav = $this->getNavbar();
-
-    $frag = <x:frag />;
-    $frag->appendChild($nav);
-
-    $table = <bootstrap:table hover-rows={true}/>;
-    $table->addClass("table-responsive");
-    $table->addClass("table-striped");
-    $thead = <thead />;
-    $row = <tr />;
-
-    $row->appendChild(<th>First Name</th>);
-    $row->appendChild(<th>Last Name</th>);
-    $thead->appendChild($row);
-
-    $tbody = <tbody />;
-
-    $provider = $this->getAttribute('provider');
-
-    $firstName = $provider->m_firstName;
-    $lastName = $provider->m_lastName;
-
-    $trow = <tr><td>{$firstName}</td><td>{$lastName}</td></tr>;
-    $tbody->appendChild($trow);
-
-    $table->appendChild($thead);
-    $table->appendChild($tbody);
-    
-    $frag->appendChild($table);
-
-    return $frag;
+    return $nav;
   }
 
 }
