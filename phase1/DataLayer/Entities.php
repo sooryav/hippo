@@ -12,65 +12,65 @@ namespace DataAccessLayer;
 
 class User {
 
-    public string $_userName;
-    public int $_userId;
-    public string $_password;
-    public ActivationToken $_activationToken;
-    public string $_userToken;
+    public string $m_userName;
+    public int $m_userId;
+    public string $m_password;
+    public ActivationToken $m_activationToken;
+    public string $m_userToken;
 
-    public function GetUserName() {return $_userName;}
-    public function GetUserId() {return $_userId;}
-    public function GetUserToken() {return $_userToken;}
-    public function GetPassword() {return $_password;}
-    public function GetActivationToken() {return $_activationToken.GetToken();}
+    public function GetUserName() {return $m_userName;}
+    public function GetUserId() {return $m_userId;}
+    public function GetUserToken() {return $m_userToken;}
+    public function GetPassword() {return $m_password;}
+    public function GetActivationToken() {return $m_activationToken.GetToken();}
 };
 
 class ActivationToken {
-    public int $_id;
-    public string $_token;
-    public string $_expiryTime;
+    public int $m_id;
+    public string $m_token;
+    public string $m_expiryTime;
 
-	public function GetToken() {return $_token;}
-	public function GetExpiryTime() {return $_expiryTime;}
+	public function GetToken() {return $m_token;}
+	public function GetExpiryTime() {return $m_expiryTime;}
 };
 
 class Address {
-    public int $_id;
-    public string $_addressLine1;
-    public string $_addressLine2;
-    public string $_city;
-    public string $_state;
-    public string $_zipCode;
+    public int $m_id;
+    public string $m_addressLine1;
+    public string $m_addressLine2;
+    public string $m_city;
+    public string $m_state;
+    public string $m_zipCode;
 
-    public function GetAddressLine1() {return $_addressLine1;}
-    public function GetAddressLine2() {return $_addressLine2;}
-    public function GetCity() {return $_city;}
-    public function GetState() {return $_state;}
-    public function GetZipcode() {return $_zipCode;}
+    public function GetAddressLine1() {return $m_addressLine1;}
+    public function GetAddressLine2() {return $m_addressLine2;}
+    public function GetCity() {return $m_city;}
+    public function GetState() {return $m_state;}
+    public function GetZipcode() {return $m_zipCode;}
 };
 
 class ContactInfo  {
-    public int $_id;
-    public string $_homePhoneNumber;
-    public string $_mobilePhoneNumber;
-    public string $_primaryEmailAddress;
-    public string $_secondaryEmailAddress;
+    public int $m_id;
+    public string $m_homePhoneNumber;
+    public string $m_mobilePhoneNumber;
+    public string $m_primaryEmailAddress;
+    public string $m_secondaryEmailAddress;
 
-    public function GetHomePhoneNumber() {return $_homePhoneNumber;}
-    public function GetMobilePhoneNumber() {return $_mobilePhoneNumber;}
-    public function GetPrimaryEmailAddress() {return $_primaryEmailAddress;}
-    public function GetSecondaryEmailAddress() {return $_secondaryEmailAddress;}
+    public function GetHomePhoneNumber() {return $m_homePhoneNumber;}
+    public function GetMobilePhoneNumber() {return $m_mobilePhoneNumber;}
+    public function GetPrimaryEmailAddress() {return $m_primaryEmailAddress;}
+    public function GetSecondaryEmailAddress() {return $m_secondaryEmailAddress;}
 }
 
 class Vendor implements IVendor {
-    public string $_vendorName;
-    public int $_id;
-    public IAddress $_address;
-    public IContactInfo $_contactInfo;
-    public ProvideType $_type;
+    public string $m_vendorName;
+    public int $m_id;
+    public IAddress $m_address;
+    public IContactInfo $m_contactInfo;
+    public ProvideType $m_type;
 
-	public function GetVendorName() {return $_vendorName;}
-	public function GetAddress() {return $_address;}
-	public function GetProviderType() {return $_type;}
-	public function GetContactInfo() {return $_contactInfo;}
+	public function GetVendorName() {return $m_vendorName;}
+	public function GetAddress() {return $m_address;}
+	public function GetProviderType() {return $m_type;}
+	public function GetContactInfo() {return $m_contactInfo;}
 };

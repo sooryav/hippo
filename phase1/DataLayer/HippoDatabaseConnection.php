@@ -10,7 +10,7 @@ class DatabaseConnection
     {    
     }
 
-    public static function GetDataStoreContext($host, $user,$password,$database)
+    public static function GetDataStoreContext($host, $user, $password, $database)
     {
         $obj = new DatabaseConnection();
         $obj->_host = $host;

@@ -67,13 +67,13 @@ interface IDataFactory {
 };
 
 interface IUserDataFactory {
-    public function GetUserByName(string $userName);
+    public function GetUserByName($userName);
     public function AddUser(User $user);
 };
 
 interface IVendorDataFactory {
-    public function GetAllProviders(string $zipCode);
-    public function GetProvidersByType(string $zipcode, ProvideType $type);
+    public function GetAllProviders($zipCode);
+    public function GetProvidersByType($zipcode, ProvideType $type);
     public function AddVendor(Vendor $vendor);
 };
 

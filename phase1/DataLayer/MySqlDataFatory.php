@@ -12,6 +12,7 @@
 namespace DataAccessLayer;
 
 require_once(__DIR__ . '/HippoDataFactoryInterface.php');
+require_once(__DIR__ . '/HippoDatabaseConnection.php');
 
 class MySqlDataConnectionFactory implements IDataConnectionFactory
 {
@@ -29,7 +30,7 @@ class MySqlDataConnection implements IDataConnection
 {
 	public function GetDataContext()
 	{
-		return DatabaseConnection::GetDataStoreContext("localhost","root","","hippo");  
+		return DatabaseConnection::GetDataStoreContext("localhost","root","","Hippo");  
 	}
 };
 

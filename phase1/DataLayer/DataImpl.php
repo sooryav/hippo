@@ -29,11 +29,11 @@ class UserDataFactory implements IUserDataFactory {
 	private $_dbContext;
 
     public function __construct(IDataConnectionFactory $connectionFactory) {
-       $this->_dbContext = $connectionFactory.GetDataContext();      
+       $this->_dbContext = $connectionFactory->GetSharedConnection()->GetDataContext();      
         
     }
 
-    public function GetUserByName(string $userName) {
+    public function GetUserByName($userName) {
     	$query = sprintf("SELECT * FROM Hippo.User where UserName = '%s'", $userName);
         $result = $this->_dbContext->query($query);
 
@@ -44,6 +44,17 @@ class UserDataFactory implements IUserDataFactory {
         }
 
         $result->close();
+        var_dump($myArray);
+
+        $userArray = $myArray[0];
+
+        $user = new User();
+        $user->m_userName = $userArray["UserName"];
+        $user->m_userId = $userArray["UserId"];
+        $user->m_password = $userArray["Password"];
+        $user->m_userToken = $userArray["Token"];
+        $user->m_activationToken = $userArray["ActivationTokenId"];        
+        return $user;
     }
 
     public function AddUser(User $user) {
@@ -67,11 +78,11 @@ class VendorDataFactory implements IVendorDataFactory {
 	private $_dbContext;
 
     public function __construct(IDataConnectionFactory $connectionFactory) {
-       $this->_dbContext = $connectionFactory.GetDataContext();      
+       $this->_dbContext = $connectionFactory->GetDataContext();      
         
     }
 
-    public function GetAllProviders(string $zipCode) {
+    public function GetAllProviders($zipCode) {
     	$query = sprintf("SELECT * FROM vendor WHERE zip='%s'", $zipCode);
         $result = $this->_dbContext->query($query);
 
@@ -84,7 +95,7 @@ class VendorDataFactory implements IVendorDataFactory {
         $result->close();
     }
 
-    public function GetProvidersByType(string $zipcode, ProvideType $type)  {
+    public function GetProvidersByType($zipcode, ProvideType $type)  {
     	$query = sprintf("SELECT * FROM vendor WHERE type='%s' and zip=%s'", $type, $zipCode);
         $result = $this->_dbContext->query($query);
 
