@@ -2,13 +2,14 @@
 
 require_once(__DIR__ . '/../core/Context.php');
 require_once(__DIR__ . '/../core/logger/LoggerFactory.php');
+require_once(__DIR__ . '/../core/Request.php');
 require_once(__DIR__ . '/../core/Router.php');
 require_once(__DIR__ . '/../config/RouteMap.php');
 
-use Core\Context;
-use Core\LoggerFactory;
-use Core\Request;
-use Core\Router;
+use \Core\Context;
+use \Core\LoggerFactory;
+use \Core\Request;
+use \Core\Router;
 
 class Application {
 
@@ -17,25 +18,26 @@ class Application {
   }
 
   public function main(): void {
-    $context = $this->createContext();  
-    $request = $context->m_request;
+    $this->startSession();
+    $context = $this->createContext();
+    $request = $this->createRequest();
 
     // Just an example how the logging can be done.
     $context->m_logger->info("Request url is $request->m_url.");
 
     // Handle the request using the router.
-    $router = new Router(Config\RouteMap::$s_map);
+    $router = new Router(\Config\RouteMap::$s_map);
     $controllerDir = __DIR__ . '/../controller';
 
     try {
-      $router->route($controllerDir, $context);
+      $router->route($controllerDir, $context, $request);
     }
     catch (Exception $e) {
       $request->m_url = '/error';
       $request->m_params =
-        Map{ 'message' => $e->getMessage() };
+        Map {'message' => $e->getMessage()};
 
-      $router->route($controllerDir, $context);
+      $router->route($controllerDir, $context, $request);
     }
   }
 
@@ -55,6 +57,13 @@ class Application {
     return new Request(
       rtrim(strtok($request_url, '?'), "/"),
       new Map($_REQUEST));
+  }
+
+  private function startSession(): void {
+    session_save_path(
+      realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session')
+    );
+    session_start();
   }
 }
 
