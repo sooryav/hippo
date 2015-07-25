@@ -28,11 +28,11 @@ class User {
     private ActivationToken $_activationToken;
     private string $_userToken;
 
-	public function GetUserName() {return $_userName;}
-	public function GetUserId() {return $_userId;}
-	public function GetUserToken() {return $_userToken;}
-	public function GetPassword() {return $_password;}
-	public function GetActivationToken() {return $_activationToken.GetToken();}
+    public function GetUserName() {return $_userName;}
+    public function GetUserId() {return $_userId;}
+    public function GetUserToken() {return $_userToken;}
+    public function GetPassword() {return $_password;}
+    public function GetActivationToken() {return $_activationToken.GetToken();}
 };
 
 class ActivationToken {
