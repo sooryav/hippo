@@ -5,7 +5,7 @@ namespace Controller;
 require_once(__DIR__ . '/ControllerBase.php');
 require_once(__DIR__ . '/../core/Context.php');
 require_once(__DIR__ . '/../html/view/ErrorPageView.php');
-require_once(__DIR__ . '/../html/view/lib/composer/vendor/autoload.php');
+require_once(__DIR__ . '/../lib/composer/vendor/autoload.php');
 
 class ErrorController extends ControllerBase {
 

@@ -8,6 +8,7 @@ class RouteMap {
 public static Map<string, string> $s_map = Map {
   "/account" => "AccountController",
   "/activate_account" => "ActivateAccountController",
+  "/dashboard" => "DashboardController",
   "/example" => "ExampleController",
   "/error" => "ErrorController",
   "/home" => "HomePageController",

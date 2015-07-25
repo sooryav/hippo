@@ -1,6 +1,6 @@
 <?hh
 
-require_once(__DIR__ . '/lib/composer/vendor/autoload.php');
+require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 
 abstract class :x:page:view extends :x:element {
 
@@ -13,7 +13,7 @@ abstract class :x:page:view extends :x:element {
   const string LOGIN_CSS = __DIR__ . '/../css/login.css';
   const string LOGIN_JS = __DIR__ . '/../js/login.js';
 
-  public function render(): xhp_html {
+  public function render() {
     return
       <html>
         <head>
