@@ -10,9 +10,7 @@ class :ui:Dashboard extends :x:page:view {
 
   attribute Provider provider @required;
 
-  private function getTable(): :x:frag {
-    $frag = <x:frag />;
-
+  private function getTable(): XHPRoot {
     $provider = $this->getAttribute('provider');
     $firstName = $provider->m_firstName;
     $lastName = $provider->m_lastName;
@@ -32,20 +30,12 @@ class :ui:Dashboard extends :x:page:view {
         </table>
         </div>;
 
-    $frag->appendChild($table);
-    return $frag;
+    return $table;
   }
 
   <<Override>>
   public function getBody(): :x:frag {
-
-    $frag = <x:frag />;
-
-    $table = $this->getTable();
-    $frag->appendChild($table);
-
-
-    return $frag;
+    return <x:frag> {$this->getTable()} </x:frag>;
   }
 
 }
@@ -56,9 +46,7 @@ class :ui:TopNav extends :x:page:view {
   public function getBody(): :x:frag {
     //$nav = $this->getNavbar();
     $navRaw = $this->getNavbarRaw();
-
     $button = $this->getButton();
-
     $frag = <x:frag />;
     //$frag->appendChild($nav);
     $frag->appendChild($navRaw);
@@ -67,13 +55,10 @@ class :ui:TopNav extends :x:page:view {
     //$table = $this->getTable();
     //$frag->appendChild($table);
 
-
     return $frag;
   }
 
   private function getButton(): XHPRoot {
-    $frag = <x:frag />;
-
     $button = 
       <form action="" method="post">
         <label>SEARCH...</label>
@@ -81,14 +66,11 @@ class :ui:TopNav extends :x:page:view {
         <input name="submitbutton" type="submit" value="Submit" />
       </form>;
 
-    $frag->appendChild($button);
-
-    return $frag;
+    return $button;
   }
 
   // This will most likely move to some generic view later
   private function getNavbar(): XHPRoot {
-
     $nav = <nav class="navbar navbar-inverse navbar-fixed-top" />;
       $div1 = <div class="container-fluid" />;
       $nav->appendChild($div1);
