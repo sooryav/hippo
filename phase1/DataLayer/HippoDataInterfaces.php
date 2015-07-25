@@ -11,11 +11,13 @@
 
 namespace DataAccessLayer;
 
-enum ProvideType {
-	Restaurant,
-	Photographer,
-	Venue,
-	ActivityProvider
+require_once(__DIR__ . '/Entities.php');
+
+abstract class ProvideType {
+	const Restaurant = 0;
+	const Photographer = 1;
+	const Venue = 2;
+	const ActivityProvider = 3;
 };
 
 /**
@@ -66,12 +68,12 @@ interface IDataFactory {
 
 interface IUserDataFactory {
     public function GetUserByName(string $userName);
-    public function AddUser(IUser $user);
+    public function AddUser(User $user);
 };
 
 interface IVendorDataFactory {
     public function GetAllProviders(string $zipCode);
     public function GetProvidersByType(string $zipcode, ProvideType $type);
-    public function AddVendor(IVendor $vendor);
+    public function AddVendor(Vendor $vendor);
 };
 

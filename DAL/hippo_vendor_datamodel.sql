@@ -55,8 +55,8 @@ CREATE TABLE IF NOT EXISTS `contact` (
 --
 
 INSERT INTO `contact` (`Id`, `Firstname`, `LastName`, `PhoneNumber`, `CellNumber`) VALUES
-(1, 'Akhil', 'Jindal', '4257897894', '4258974589'),
-(2, 'Atul', 'Gupta', '5467782909', '8956989874');
+(1, 'John', 'Doe', '4258828080', '4251233456),
+(2, 'Hippo', 'Planner', '5467782909', '8956989874');
 
 -- --------------------------------------------------------
 

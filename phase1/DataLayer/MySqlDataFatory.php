@@ -11,7 +11,9 @@
 
 namespace DataAccessLayer;
 
-class MySqlDataConnectionFactory implement IDataConnectionFactory
+require_once(__DIR__ . '/HippoDataFactoryInterface.php');
+
+class MySqlDataConnectionFactory implements IDataConnectionFactory
 {
     public function GetSharedConnection()
     {
