@@ -46,8 +46,12 @@ class :ui:TopNav extends :x:page:view {
   public function getBody(): :x:frag {
     //$nav = $this->getNavbar();
     $navRaw = $this->getNavbarRaw();
-    $button = $this->getButton();
-    $frag = <x:frag />;
+    //$button = $this->getButton();
+    $frag = 
+      <x:frag>
+        <script src="../js/dashboard.js">
+        </script>
+      </x:frag>;
     //$frag->appendChild($nav);
     $frag->appendChild($navRaw);
     //$frag->appendChild($button);
@@ -60,6 +64,7 @@ class :ui:TopNav extends :x:page:view {
 
   private function getButton(): XHPRoot {
     $button = 
+
       <form action="" method="post">
         <label>SEARCH...</label>
         <input type="text" name="name_entered" id="name" /><br></br>
@@ -127,12 +132,13 @@ class :ui:TopNav extends :x:page:view {
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#">Dashboard</a></li>
-              <li><a href="#">Settings</a></li>
+              <li><a id="settings" href="#">Settings</a></li>
+              <li><a id="profile" href="#" onclick="RedirectToProfile();return false;">Profile</a></li>
               <li><a href="#">Help</a></li>
             </ul>
-            <form action="/dashboard" class="navbar-right" method="get">
+            <!--form action="/dashboard" class="navbar-right" method="get">
               <input type="submit" name="GetProfile" value="Profile" />
-            </form>
+            </form-->
             <form action="/dashboard" class="navbar-form navbar-right" method="post">
               <input type="text" name="SearchTab" class="form-control" placeholder="Search..." />
             </form>
