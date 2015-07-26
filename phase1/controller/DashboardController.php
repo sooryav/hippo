@@ -26,9 +26,9 @@ class DashboardController extends ControllerBase {
       //$jsonRequest = json_encode($context->m_request->m_params);
       //echo $jsonRequest;
     } else {
+      $jsonRequest = json_encode($context->m_request->m_params);
+      echo $jsonRequest;
       return <ui:TopNav />;
-      //$jsonRequest = json_encode($context->m_request->m_params);
-      //echo $jsonRequest;
     }
   }
 

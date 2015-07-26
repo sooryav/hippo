@@ -10,9 +10,7 @@ class :ui:Dashboard extends :x:page:view {
 
   attribute Provider provider @required;
 
-  private function getTable(): :x:frag {
-    $frag = <x:frag />;
-
+  private function getTable(): XHPRoot {
     $provider = $this->getAttribute('provider');
     $firstName = $provider->m_firstName;
     $lastName = $provider->m_lastName;
@@ -32,20 +30,12 @@ class :ui:Dashboard extends :x:page:view {
         </table>
         </div>;
 
-    $frag->appendChild($table);
-    return $frag;
+    return $table;
   }
 
   <<Override>>
   public function getBody(): :x:frag {
-
-    $frag = <x:frag />;
-
-    $table = $this->getTable();
-    $frag->appendChild($table);
-
-
-    return $frag;
+    return <x:frag> {$this->getTable()} </x:frag>;
   }
 
 }
@@ -56,10 +46,12 @@ class :ui:TopNav extends :x:page:view {
   public function getBody(): :x:frag {
     //$nav = $this->getNavbar();
     $navRaw = $this->getNavbarRaw();
-
-    $button = $this->getButton();
-
-    $frag = <x:frag />;
+    //$button = $this->getButton();
+    $frag = 
+      <x:frag>
+        <script src="../js/dashboard.js">
+        </script>
+      </x:frag>;
     //$frag->appendChild($nav);
     $frag->appendChild($navRaw);
     //$frag->appendChild($button);
@@ -67,28 +59,23 @@ class :ui:TopNav extends :x:page:view {
     //$table = $this->getTable();
     //$frag->appendChild($table);
 
-
     return $frag;
   }
 
   private function getButton(): XHPRoot {
-    $frag = <x:frag />;
-
     $button = 
+
       <form action="" method="post">
         <label>SEARCH...</label>
         <input type="text" name="name_entered" id="name" /><br></br>
         <input name="submitbutton" type="submit" value="Submit" />
       </form>;
 
-    $frag->appendChild($button);
-
-    return $frag;
+    return $button;
   }
 
   // This will most likely move to some generic view later
   private function getNavbar(): XHPRoot {
-
     $nav = <nav class="navbar navbar-inverse navbar-fixed-top" />;
       $div1 = <div class="container-fluid" />;
       $nav->appendChild($div1);
@@ -145,12 +132,13 @@ class :ui:TopNav extends :x:page:view {
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#">Dashboard</a></li>
-              <li><a href="#">Settings</a></li>
+              <li><a id="settings" href="#">Settings</a></li>
+              <li><a id="profile" href="#" onclick="RedirectToProfile();return false;">Profile</a></li>
               <li><a href="#">Help</a></li>
             </ul>
-            <form action="/dashboard" class="navbar-right" method="get">
+            <!--form action="/dashboard" class="navbar-right" method="get">
               <input type="submit" name="GetProfile" value="Profile" />
-            </form>
+            </form-->
             <form action="/dashboard" class="navbar-form navbar-right" method="post">
               <input type="text" name="SearchTab" class="form-control" placeholder="Search..." />
             </form>
