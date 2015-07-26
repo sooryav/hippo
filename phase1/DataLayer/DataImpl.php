@@ -60,16 +60,22 @@ class UserDataFactory implements IUserDataFactory {
     public function AddUser(User $user) {
     	$query = sprintf("INSERT INTO `Hippo`.`User`
 						(`UserName`, `Password`, `Token`, `ActivationTokenId`) VALUES
-						('%s', %s, %s, %s)", 
-						$user.GetuserName(), 
-						$user.GetPassword(), 
-						$user.GetToken(), 
-						$user.GetActivationToken().GetToken()
+						('%s', '%s', '%s', %s)", 
+						$user->m_userName, 
+						$user->m_password, 
+						$user->m_userToken, 
+						$user->m_activationToken
 						);
+
+        echo "Query: ";
+        var_dump($query);
 
         $result = $this->_dbContext->query($query);
 
-        $result->close();
+        echo "\nResult: ";
+        var_dump($result);
+
+        return $result;
     }
 };
 

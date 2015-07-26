@@ -1,34 +1,36 @@
 <?hh
 
 namespace Tests\DataTests;
+namespace DataAccessLayer;
 
 require_once(__DIR__ . '/../../DataLayer/MySqlDataFatory.php');
 require_once(__DIR__ . '/../../DataLayer/DataImpl.php');
 
 class BaseDataConnectivityTest extends \PHPUnit_Framework_TestCase {
 
-  public function testGetData() {
-    $dataConnectionFactory = new MySqlDataConnectionFactory();
-    $dataFactory = new DataFactory();
+  public function testUserData() {
+    $userName = 'HippoTestUser1';
 
-    $userFactory = $dataFactory.GetUserDataFactory($dataConnectionFactory);
+    echo 'Starting test';
+    echo "\n";
+    $dataConnectionFactory = new \DataAccessLayer\MySqlDataConnectionFactory();
+    $dataFactory = new \DataAccessLayer\DataFactory();
 
-    $users = $userFactory.GetUserByName('HippoTestUser1');
+    $userFactory = $dataFactory->GetUserDataFactory($dataConnectionFactory);
 
-    echo $users;
+    $user = new User();
+    $user->m_userName = $userName;
+    $user->m_password = "Password";
+    $user->m_userToken = "1234Abcd";
+    $user->m_activationToken = 2;   
 
-/*
-    // By default, ExampleModel returns an array with the followings:
-    // 'a' => 1, 'b' => 2, 'c' => 3.
-    $this->assertEquals(
-      Map{'a' => 1, 'b' => 2, 'c' => 3},
-      $model->getData(Map{}));
+    $userFactory->AddUser($user);
+    
+    $user = $userFactory->GetUserByName($userName);
 
-    // Test if the input array is merged to the defaults.
-    $this->assertEquals(
-      Map{'a' => 1, 'b' => 2, 'c' => 3, 'hello' => 'test'},
-      $model->getData(Map{'hello' => 'test'}));
-      */
+    var_dump($user);
+
+    $this->assertEquals($user->m_userName, $userName);
   }
 
 }
