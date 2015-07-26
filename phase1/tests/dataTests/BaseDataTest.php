@@ -13,10 +13,21 @@ class BaseDataConnectivityTest extends \PHPUnit_Framework_TestCase {
 
     echo 'Starting test';
     echo "\n";
+
     $dataConnectionFactory = new \DataAccessLayer\MySqlDataConnectionFactory();
     $dataFactory = new \DataAccessLayer\DataFactory();
 
     $userFactory = $dataFactory->GetUserDataFactory($dataConnectionFactory);
+
+    while(true) {
+      $user = $userFactory->GetUserByName($userName);
+      
+      if (!$user) break;
+      
+      echo "Found an existing user with user name $userName\n";
+
+      $userFactory->DeleteUserById($user->m_userId);
+    }
 
     $user = new User();
     $user->m_userName = $userName;

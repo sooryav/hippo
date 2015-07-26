@@ -37,6 +37,16 @@ class UserDataFactory implements IUserDataFactory {
     	$query = sprintf("SELECT * FROM Hippo.User where UserName = '%s'", $userName);
         $result = $this->_dbContext->query($query);
 
+        if (!$result) {
+            echo "Error executing query: $query. Result: $result";
+            return null;
+        }
+
+        if (mysqli_num_rows($result) == 0) {
+            echo "No user found with user name: $userName\n";
+            return null;
+        }
+
         $myArray = array();
         
         while($row = $result->fetch_array(MYSQL_ASSOC)) {
@@ -44,6 +54,15 @@ class UserDataFactory implements IUserDataFactory {
         }
 
         $result->close();
+
+        $userCount = count($myArray);
+
+        if (!$userCount) {
+            echo "No user found with user name: $userName\n";
+            return null;
+        }
+
+        echo "Users found with user name: $userName. Count: $userCount\n";
         var_dump($myArray);
 
         $userArray = $myArray[0];
@@ -58,6 +77,18 @@ class UserDataFactory implements IUserDataFactory {
     }
 
     public function AddUser(User $user) {
+
+        if (!isset($user)) {
+            return false;
+        }
+
+        $existingUser = $this->GetUserByName($user->m_userName);
+
+        if ($existingUser) {
+            echo "User with username: $userName exists already"; 
+            return false;
+        }
+
     	$query = sprintf("INSERT INTO `Hippo`.`User`
 						(`UserName`, `Password`, `Token`, `ActivationTokenId`) VALUES
 						('%s', '%s', '%s', %s)", 
@@ -68,7 +99,26 @@ class UserDataFactory implements IUserDataFactory {
 						);
 
         echo "Query: ";
-        var_dump($query);
+        echo $query;
+
+        $result = $this->_dbContext->query($query);
+
+        echo "\nResult: ";
+        var_dump($result);
+
+        return $result;
+    }
+
+    public function DeleteUserById($userId) {
+
+        if (!isset($userId)) {
+            return false;
+        }
+
+        $query = sprintf("DELETE FROM `Hippo`.`User` WHERE `UserId`='%s'", $userId);
+
+        echo "\nQuery: ";
+        echo $query;
 
         $result = $this->_dbContext->query($query);
 

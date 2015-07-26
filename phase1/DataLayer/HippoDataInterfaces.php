@@ -69,6 +69,7 @@ interface IDataFactory {
 interface IUserDataFactory {
     public function GetUserByName($userName);
     public function AddUser(User $user);
+    public function DeleteUserById($userId);
 };
 
 interface IVendorDataFactory {
