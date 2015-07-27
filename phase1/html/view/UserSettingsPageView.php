@@ -3,17 +3,17 @@
 require_once(__DIR__ . '/../../model/Util.php');
 require_once(__DIR__ . '/XPageView.php');
 require_once(__DIR__ . '/LeftNavView.php');
-require_once(__DIR__ . '/lib/composer/vendor/autoload.php');
+require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 
 class :user:settings:page:view extends :x:page:view {
   attribute
-    \Core\Context context = null,
+    \Model\LoggedInUser logged_in_user = null,
     array errors = array(),
     array successes = array();
 
   <<Override>>
   public function getBody(): :x:frag {
-    $context = $this->getAttribute('context');
+    $loggedInUser = $this->getAttribute('logged_in_user');
     return
     <x:frag>
       <div id="wrapper">
@@ -32,7 +32,7 @@ class :user:settings:page:view extends :x:page:view {
             <br />
             <table><tr>
             <td style="margin-right:20%;vertical-align:top;">
-              <left-nav:view context={$context}/>
+              <left-nav:view logged_in_user={$loggedInUser}/>
             </td>
             <td style="padding-left:20%">
               <div id="main">
@@ -48,7 +48,7 @@ class :user:settings:page:view extends :x:page:view {
                     </div>
                     <div class="form-group">
                       <label class="control-label">Email</label>
-                      <input class="form-control" type="text" name="email" value={$context->getLoggedInUser()->email}/>
+                      <input class="form-control" type="text" name="email" value={$loggedInUser->email}/>
                     </div>
                     <div class="form-group">
                       <label class="control-label">New Password</label>

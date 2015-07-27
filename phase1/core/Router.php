@@ -21,7 +21,7 @@ class Router {
 
   // Router class constructor that takes route map as an input.
   public function __construct(
-    private Map<string, string> $m_routeMap) {
+    private ImmMap<string, string> $m_routeMap) {
   }
 
   // $controllerDir: the base directory where the controller php files exist.

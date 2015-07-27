@@ -20,3 +20,6 @@ git reset HEAD path/to/unwanted_file
 
 // commonly used command for uncommit
 git reset --soft HEAD^
+
+// ignore all the local changes and sync the repository
+git reset --hard origin/master

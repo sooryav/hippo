@@ -97,7 +97,7 @@ class UserSettingsController extends ControllerBase {
       }
     }
    
-    return <user:settings:page:view context={$context} errors={$errors} successes={$successes} />;
+    return <user:settings:page:view logged_in_user={$context->getLoggedInUser()} errors={$errors} successes={$successes} />;
   }
 
 }

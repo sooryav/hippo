@@ -2,8 +2,9 @@
   "minimum-stability": "dev",
 
   "require": {
-    "monolog/monolog": "^1.14",
+    "facebook/xhp-lib": "2.x",
     "hhvm/xhp-bootstrap": "dev-master",
+    "monolog/monolog": "^1.14",
     "twbs/bootstrap": "^3.3"
   },
     

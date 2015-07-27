@@ -53,10 +53,6 @@ http://docs.hhvm.com/manual/en/install.hack.bootstrapping.php
 // Stop apache server
 /usr/share/hhvm/install_fastcgi.sh
 
-manually start/stop apache server commands - it should not be needed.
-/etc/init.d/apache2 stop
-/etc/init.d/apache2 start
-/etc/init.d/apache2 restart
 
 
 //hhvm restart
@@ -68,13 +64,36 @@ to be routed via apache to hhvm, so index.html won't be compiled via hhvm
 
 // Useful config locations
 /usr/share/hhvm
-/etc/apache2/mod-enabled
-/etc/apache2/sites-available
+/etc/nginx/sites-available/default   -> This config has routing for index.php 
+                                        and root location to find index.html for nginx
 
+// nginx
+sudo apt-get install nginx
+sudo service nginx restart
+
+// To enable hhvm for nginx, run the script at
+/usr/share/hhvm/install_fastcgi.sh
+
+// Default Location for nginx index.html file
+/usr/share/nginx/html
+
+// reload nginx configs
+sudo service nginx reload
+
+// APACHE configs
 Document Root for apache is specified in 
 /etc/apache2/sites-available/000-default.conf
 
+/etc/apache2/mod-enabled
+/etc/apache2/sites-available
 
+manually start/stop apache server commands - it should not be needed.
+/etc/init.d/apache2 stop
+/etc/init.d/apache2 start
+/etc/init.d/apache2 restart
+
+// remove apache2 installation
+sudo apt-get remove apache2*
 
 // LARAVEL DOCUMENTATION
 Once composer is installed, create composer.json file

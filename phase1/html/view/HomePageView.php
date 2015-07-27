@@ -3,15 +3,15 @@
 require_once(__DIR__ . '/../../model/Util.php');
 require_once(__DIR__ . '/XPageView.php');
 require_once(__DIR__ . '/LeftNavView.php');
-require_once(__DIR__ . '/lib/composer/vendor/autoload.php');
+require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 
 class :home:page:view extends :x:page:view {
   attribute
-    \Core\Context context = null;
+    \Model\LoggedInUser logged_in_user = null;
 
   <<Override>>
   public function getBody(): :x:frag {
-    $loggedInUser = $this->getAttribute('context')->getLoggedInUser();
+    $loggedInUser = $this->getAttribute('logged_in_user');
     $msg = '';
     if ($loggedInUser) {
       $msg = "Hello " . $loggedInUser->displayname . "! ";
@@ -53,6 +53,9 @@ class :home:page:view extends :x:page:view {
           <div style="padding-top:10%">
             <br />
             <table><tr>
+            <td style="margin-right:20%;vertical-align:top;">
+              <left-nav:view logged_in_user={$this->getAttribute('logged_in_user')}/>
+            </td>
             <td style="margin-left:20%">
               <div id="main" style="margin-left:20%;width:100%">
                 <p class="jumbotron">

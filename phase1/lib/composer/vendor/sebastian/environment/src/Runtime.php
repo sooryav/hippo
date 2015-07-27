@@ -28,7 +28,9 @@ class Runtime
      */
     public function canCollectCodeCoverage()
     {
-        return $this->isHHVM() || $this->hasXdebug();
+        return $this->isHHVM() ||
+               $this->hasXdebug() ||
+               ($this->isPHPDBG() && function_exists('phpdbg_start_oplog'));
     }
 
     /**
@@ -108,6 +110,8 @@ class Runtime
     {
         if ($this->isHHVM()) {
             return 'HHVM';
+        } elseif ($this->isPHPDBG()) {
+            return 'PHPDBG';
         } else {
             return 'PHP';
         }
@@ -158,12 +162,22 @@ class Runtime
     }
 
     /**
-     * Returns true when the runtime used is PHP.
+     * Returns true when the runtime used is PHP without the PHPDBG SAPI.
      *
      * @return bool
      */
     public function isPHP()
     {
-        return !$this->isHHVM();
+        return !$this->isHHVM() && !$this->isPHPDBG();
+    }
+
+    /**
+     * Returns true when the runtime used is PHP with the PHPDBG SAPI.
+     *
+     * @return bool
+     */
+    public function isPHPDBG()
+    {
+        return !$this->isHHVM() && PHP_SAPI === 'phpdbg';
     }
 }

@@ -1,112 +1,33 @@
 [
     {
-        "name": "sebastian/version",
-        "version": "1.0.6",
-        "version_normalized": "1.0.6.0",
+        "name": "facebook/xhp-lib",
+        "version": "2.2.2",
+        "version_normalized": "2.2.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/sebastianbergmann/version.git",
-            "reference": "58b3a85e7999757d6ad81c787a1fbf5ff6c628c6"
+            "url": "https://github.com/facebook/xhp-lib.git",
+            "reference": "bda55865943077aa3893ee3f6c34a45c7081e274"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/58b3a85e7999757d6ad81c787a1fbf5ff6c628c6",
-            "reference": "58b3a85e7999757d6ad81c787a1fbf5ff6c628c6",
-            "shasum": ""
-        },
-        "time": "2015-06-21 13:59:46",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "lead"
-            }
-        ],
-        "description": "Library that helps with managing the version number of Git-hosted PHP projects",
-        "homepage": "https://github.com/sebastianbergmann/version"
-    },
-    {
-        "name": "phpdocumentor/reflection-docblock",
-        "version": "2.0.4",
-        "version_normalized": "2.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-            "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
-            "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
+            "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/bda55865943077aa3893ee3f6c34a45c7081e274",
+            "reference": "bda55865943077aa3893ee3f6c34a45c7081e274",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3"
+            "hhvm": "~3.6"
         },
         "require-dev": {
-            "phpunit/phpunit": "~4.0"
+            "91carriage/phpunit-hhi": "4.5.*",
+            "phpunit/phpunit": "4.5.*"
         },
-        "suggest": {
-            "dflydev/markdown": "~1.0",
-            "erusev/parsedown": "~1.0"
-        },
-        "time": "2015-02-03 12:10:50",
+        "time": "2015-07-14 17:48:46",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.0.x-dev"
+                "dev-master": "2.x-dev"
             }
         },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "phpDocumentor": [
-                    "src/"
-                ]
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Mike van Riel",
-                "email": "mike.vanriel@naenius.com"
-            }
-        ]
-    },
-    {
-        "name": "phpunit/php-text-template",
-        "version": "1.2.1",
-        "version_normalized": "1.2.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sebastianbergmann/php-text-template.git",
-            "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
-            "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "time": "2015-06-21 13:50:34",
-        "type": "library",
         "installation-source": "dist",
         "autoload": {
             "classmap": [
@@ -117,17 +38,56 @@
         "license": [
             "BSD-3-Clause"
         ],
-        "authors": [
-            {
-                "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "lead"
-            }
-        ],
-        "description": "Simple template engine.",
-        "homepage": "https://github.com/sebastianbergmann/php-text-template/",
+        "description": "Class library for XHP",
+        "homepage": "https://github.com/facebook/xhp-lib",
         "keywords": [
-            "template"
+            "facebook",
+            "hack",
+            "hhvm",
+            "xhp"
+        ]
+    },
+    {
+        "name": "hhvm/xhp-bootstrap",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/hhvm/xhp-bootstrap.git",
+            "reference": "8fec7c9a5d67a6abfec90d223d9948a367ae1f86"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/hhvm/xhp-bootstrap/zipball/8fec7c9a5d67a6abfec90d223d9948a367ae1f86",
+            "reference": "8fec7c9a5d67a6abfec90d223d9948a367ae1f86",
+            "shasum": ""
+        },
+        "require": {
+            "facebook/xhp-lib": "~2.2.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~3.5"
+        },
+        "time": "2015-07-23 05:22:59",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "Use Bootstrap with XHP",
+        "homepage": "https://github.com/hhvm/xhp-bootstrap",
+        "keywords": [
+            "bootstrap",
+            "facebook",
+            "hack",
+            "hhvm",
+            "xhp"
         ]
     },
     {
@@ -185,12 +145,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/monolog.git",
-            "reference": "c5b08724f4b11fd90a2c36a64d4868bcee7ba6a4"
+            "reference": "e4f45be5dcfeb54c45f85b50cdbb3ef8a2bfbd81"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c5b08724f4b11fd90a2c36a64d4868bcee7ba6a4",
-            "reference": "c5b08724f4b11fd90a2c36a64d4868bcee7ba6a4",
+            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/e4f45be5dcfeb54c45f85b50cdbb3ef8a2bfbd81",
+            "reference": "e4f45be5dcfeb54c45f85b50cdbb3ef8a2bfbd81",
             "shasum": ""
         },
         "require": {
@@ -224,7 +184,7 @@
             "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
             "videlalvaro/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib"
         },
-        "time": "2015-07-14 09:27:59",
+        "time": "2015-07-20 18:31:46",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -254,6 +214,49 @@
             "log",
             "logging",
             "psr-3"
+        ]
+    },
+    {
+        "name": "phpunit/php-text-template",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sebastianbergmann/php-text-template.git",
+            "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
+            "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2015-06-21 13:50:34",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Sebastian Bergmann",
+                "email": "sebastian@phpunit.de",
+                "role": "lead"
+            }
+        ],
+        "description": "Simple template engine.",
+        "homepage": "https://github.com/sebastianbergmann/php-text-template/",
+        "keywords": [
+            "template"
         ]
     },
     {
@@ -306,12 +309,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/environment.git",
-            "reference": "bc66c3bbe6e5822c34395049e110566491cafa3b"
+            "reference": "70c3ba9398826b0d0117c2e9f1922c3bc47644ce"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/bc66c3bbe6e5822c34395049e110566491cafa3b",
-            "reference": "bc66c3bbe6e5822c34395049e110566491cafa3b",
+            "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/70c3ba9398826b0d0117c2e9f1922c3bc47644ce",
+            "reference": "70c3ba9398826b0d0117c2e9f1922c3bc47644ce",
             "shasum": ""
         },
         "require": {
@@ -320,7 +323,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.4"
         },
-        "time": "2015-06-21 13:07:52",
+        "time": "2015-07-26 09:06:39",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -350,6 +353,43 @@
             "environment",
             "hhvm"
         ]
+    },
+    {
+        "name": "sebastian/version",
+        "version": "1.0.6",
+        "version_normalized": "1.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sebastianbergmann/version.git",
+            "reference": "58b3a85e7999757d6ad81c787a1fbf5ff6c628c6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/58b3a85e7999757d6ad81c787a1fbf5ff6c628c6",
+            "reference": "58b3a85e7999757d6ad81c787a1fbf5ff6c628c6",
+            "shasum": ""
+        },
+        "time": "2015-06-21 13:59:46",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Sebastian Bergmann",
+                "email": "sebastian@phpunit.de",
+                "role": "lead"
+            }
+        ],
+        "description": "Library that helps with managing the version number of Git-hosted PHP projects",
+        "homepage": "https://github.com/sebastianbergmann/version"
     },
     {
         "name": "phpunit/php-token-stream",
@@ -458,12 +498,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-            "reference": "1ba1290e47c3275be779967de1516e2989b6e130"
+            "reference": "df29d420311aa94ed1eb26560b573710f3603b2d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/1ba1290e47c3275be779967de1516e2989b6e130",
-            "reference": "1ba1290e47c3275be779967de1516e2989b6e130",
+            "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/df29d420311aa94ed1eb26560b573710f3603b2d",
+            "reference": "df29d420311aa94ed1eb26560b573710f3603b2d",
             "shasum": ""
         },
         "require": {
@@ -471,7 +511,7 @@
             "phpunit/php-file-iterator": "~1.3",
             "phpunit/php-text-template": "~1.2",
             "phpunit/php-token-stream": "~1.3",
-            "sebastian/environment": "~1.0",
+            "sebastian/environment": "~1.3",
             "sebastian/version": "~1.0"
         },
         "require-dev": {
@@ -483,7 +523,7 @@
             "ext-xdebug": ">=2.2.1",
             "ext-xmlwriter": "*"
         },
-        "time": "2015-07-13 11:25:16",
+        "time": "2015-07-27 14:08:10",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -752,12 +792,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/comparator.git",
-            "reference": "dee3fd1828677b2182c076ad2caecbb5c7bdbf1c"
+            "reference": "937efb279bd37a375bcadf584dec0726f84dbf22"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/dee3fd1828677b2182c076ad2caecbb5c7bdbf1c",
-            "reference": "dee3fd1828677b2182c076ad2caecbb5c7bdbf1c",
+            "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/937efb279bd37a375bcadf584dec0726f84dbf22",
+            "reference": "937efb279bd37a375bcadf584dec0726f84dbf22",
             "shasum": ""
         },
         "require": {
@@ -768,11 +808,11 @@
         "require-dev": {
             "phpunit/phpunit": "~4.4"
         },
-        "time": "2015-07-19 12:54:49",
+        "time": "2015-07-26 15:48:44",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.1.x-dev"
+                "dev-master": "1.2.x-dev"
             }
         },
         "installation-source": "source",
@@ -818,12 +858,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/Yaml.git",
-            "reference": "6a39d07f534ad980872a864d339ff979173467cf"
+            "reference": "1edbff215ddf93bf41e8b6a0e02428ef66fa2ea3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Yaml/zipball/6a39d07f534ad980872a864d339ff979173467cf",
-            "reference": "6a39d07f534ad980872a864d339ff979173467cf",
+            "url": "https://api.github.com/repos/symfony/Yaml/zipball/1edbff215ddf93bf41e8b6a0e02428ef66fa2ea3",
+            "reference": "1edbff215ddf93bf41e8b6a0e02428ef66fa2ea3",
             "shasum": ""
         },
         "require": {
@@ -832,7 +872,7 @@
         "require-dev": {
             "symfony/phpunit-bridge": "~2.8|~3.0"
         },
-        "time": "2015-07-01 20:40:29",
+        "time": "2015-07-26 09:09:51",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -916,6 +956,57 @@
         "keywords": [
             "constructor",
             "instantiate"
+        ]
+    },
+    {
+        "name": "phpdocumentor/reflection-docblock",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+            "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
+            "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "suggest": {
+            "dflydev/markdown": "~1.0",
+            "erusev/parsedown": "~1.0"
+        },
+        "time": "2015-02-03 12:10:50",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "phpDocumentor": [
+                    "src/"
+                ]
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Mike van Riel",
+                "email": "mike.vanriel@naenius.com"
+            }
         ]
     },
     {
@@ -1113,115 +1204,24 @@
         ]
     },
     {
-        "name": "facebook/xhp-lib",
-        "version": "2.2.2",
-        "version_normalized": "2.2.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/facebook/xhp-lib.git",
-            "reference": "bda55865943077aa3893ee3f6c34a45c7081e274"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/bda55865943077aa3893ee3f6c34a45c7081e274",
-            "reference": "bda55865943077aa3893ee3f6c34a45c7081e274",
-            "shasum": ""
-        },
-        "require": {
-            "hhvm": "~3.6"
-        },
-        "require-dev": {
-            "91carriage/phpunit-hhi": "4.5.*",
-            "phpunit/phpunit": "4.5.*"
-        },
-        "time": "2015-07-14 17:48:46",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": "Class library for XHP",
-        "homepage": "https://github.com/facebook/xhp-lib",
-        "keywords": [
-            "facebook",
-            "hack",
-            "hhvm",
-            "xhp"
-        ]
-    },
-    {
-        "name": "hhvm/xhp-bootstrap",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/hhvm/xhp-bootstrap.git",
-            "reference": "3b3af2de7218bdf7a2ae1b0821be94b88e56eab7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/hhvm/xhp-bootstrap/zipball/3b3af2de7218bdf7a2ae1b0821be94b88e56eab7",
-            "reference": "3b3af2de7218bdf7a2ae1b0821be94b88e56eab7",
-            "shasum": ""
-        },
-        "require": {
-            "facebook/xhp-lib": "~2.2.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~3.5"
-        },
-        "time": "2015-07-20 04:14:31",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "lib/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": "Use Bootstrap with XHP",
-        "homepage": "https://github.com/hhvm/xhp-bootstrap",
-        "keywords": [
-            "bootstrap",
-            "facebook",
-            "hack",
-            "hhvm",
-            "xhp"
-        ]
-    },
-    {
         "name": "twbs/bootstrap",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/twbs/bootstrap.git",
-            "reference": "66543ed112e9344d59eba343e3a45200e3ebd839"
+            "reference": "d8cae018f41fdd780e32e91bd76cd3f08b67ea70"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/66543ed112e9344d59eba343e3a45200e3ebd839",
-            "reference": "66543ed112e9344d59eba343e3a45200e3ebd839",
+            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/d8cae018f41fdd780e32e91bd76cd3f08b67ea70",
+            "reference": "d8cae018f41fdd780e32e91bd76cd3f08b67ea70",
             "shasum": ""
         },
         "replace": {
             "twitter/bootstrap": "self.version"
         },
-        "time": "2015-07-13 02:53:04",
+        "time": "2015-07-18 06:18:56",
         "type": "library",
         "extra": {
             "branch-alias": {
