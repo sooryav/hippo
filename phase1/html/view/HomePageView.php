@@ -3,7 +3,7 @@
 require_once(__DIR__ . '/../../model/Util.php');
 require_once(__DIR__ . '/XPageView.php');
 require_once(__DIR__ . '/LeftNavView.php');
-require_once(__DIR__ . '/lib/composer/vendor/autoload.php');
+require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 
 class :home:page:view extends :x:page:view {
   attribute

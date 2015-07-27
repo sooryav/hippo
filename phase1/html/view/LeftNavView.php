@@ -1,7 +1,7 @@
 <?hh
 
 require_once(__DIR__ . '/../../model/Util.php');
-require_once(__DIR__ . '/lib/composer/vendor/autoload.php');
+require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 
 class :left-nav:view extends :x:element {
   attribute
