@@ -30,7 +30,7 @@ class LogoutController extends ControllerBase {
       $context->getRequest()->getLoggedInUser()->userLogOut();
     }
 
-    header("Location: /login");
+    header("Location: /home");
     die();
     /*$websiteUrl = \Core\Context::WEBSITE_URL;
     if(!empty($websiteUrl)) {

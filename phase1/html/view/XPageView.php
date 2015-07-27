@@ -1,5 +1,7 @@
 <?hh
 
+require_once(__DIR__ . '/HeaderView.php');
+require_once(__DIR__ . '/FooterView.php');
 require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 
 abstract class :x:page:view extends :x:element {
@@ -41,7 +43,9 @@ abstract class :x:page:view extends :x:element {
           />
         </head>
         <body>
+          <header:view />
           {$this->getBody()}
+          <footer:view />
         </body>
      </html>;
   }
