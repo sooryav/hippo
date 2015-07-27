@@ -30,7 +30,7 @@ class MySqlDataConnection implements IDataConnection
 {
 	public function GetDataContext()
 	{
-		return DatabaseConnection::GetDataStoreContext("localhost","root","kenmore09","Hippo");  
+		return DatabaseConnection::GetDataStoreContext("localhost","root","","Hippo");  
 	}
 };
 

@@ -27,6 +27,24 @@ class DatabaseConnection
         return $mysqli;        
     }
 
+    public static function CheckIfDatabaseExists($host, $user, $password, $database)
+    {
+        $obj = new DatabaseConnection();
+        $obj->_host = $host;
+        $obj->_user = $user;
+        $obj->_password = $password;
+        $obj->_database = $database;
+
+        $connection = mysql_connect($host, $user, $password);
+
+        if(!$connection)
+        {
+            return false;
+        }
+        return true;        
+    }
+
+
     public static function GetDataStoreContextUsingConfigFile($configFilePath)
     {
      //TODO: This will be done later      
