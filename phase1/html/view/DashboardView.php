@@ -38,6 +38,11 @@ class :ui:Dashboard extends :x:page:view {
     return <x:frag> {$this->getTable()} </x:frag>;
   }
 
+  <<Override>>
+  protected function displayHeader() : bool {
+    return false;
+  }
+
 }
 
 class :ui:TopNav extends :x:page:view {
@@ -60,6 +65,11 @@ class :ui:TopNav extends :x:page:view {
     //$frag->appendChild($table);
 
     return $frag;
+  }
+
+  <<Override>>
+  protected function displayHeader() : bool {
+    return false;
   }
 
   private function getButton(): XHPRoot {

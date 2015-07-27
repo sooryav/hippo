@@ -16,6 +16,10 @@ abstract class :x:page:view extends :x:element {
   const string LOGIN_JS = __DIR__ . '/../js/login.js';
 
   public function render() {
+    $header = null;
+    if ($this->displayHeader()) {
+      $header = <header:view />;
+    }
     return
       <html>
         <head>
@@ -43,7 +47,7 @@ abstract class :x:page:view extends :x:element {
           />
         </head>
         <body>
-          <header:view />
+          {$header}
           {$this->getBody()}
           <footer:view />
         </body>
@@ -57,8 +61,13 @@ abstract class :x:page:view extends :x:element {
   protected function getCSS(): string {
     return '';
   }
+
   protected function getJS(): string {
     return '';
+  }
+
+  protected function displayHeader() : bool {
+    return true;
   }
 
 }
