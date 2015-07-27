@@ -19,8 +19,8 @@ class DataFactory implements IDataFactory {
     	return new UserDataFactory($connectionFactory);
     }
 
-    public function GetVendorDataFactory(IDataConnectionFactory $connectionFactory) {
-    	return new VendorDataFactory($connectionFactory);
+    public function GetProviderDataFactory(IDataConnectionFactory $connectionFactory) {
+    	return new ProviderDataFactory($connectionFactory);
     }
 };
 
@@ -38,11 +38,11 @@ class UserDataFactory implements IUserDataFactory {
         $result = $this->_dbContext->query($query);
 
         if (!$result) {
-            echo "Error executing query: $query. Result: $result";
+            echo "Error executing query: $query. Result: $result" . $this->_dbContext->error;
             return null;
         }
 
-        if (mysqli_num_rows($result) == 0) {
+        if ($result->num_rows == 0) {
             echo "No user found with user name: $userName\n";
             return null;
         }
@@ -57,13 +57,12 @@ class UserDataFactory implements IUserDataFactory {
 
         $userCount = count($myArray);
 
-        if (!$userCount) {
+        if ($userCount == 0) {
             echo "No user found with user name: $userName\n";
             return null;
         }
 
         echo "Users found with user name: $userName. Count: $userCount\n";
-        var_dump($myArray);
 
         $userArray = $myArray[0];
 
@@ -98,13 +97,12 @@ class UserDataFactory implements IUserDataFactory {
 						$user->m_activationToken
 						);
 
-        echo "Query: ";
-        echo $query;
+        echo "Query: $query\n";
 
         $result = $this->_dbContext->query($query);
 
-        echo "\nResult: ";
-        var_dump($result);
+        $resultString = $result ? 'true' : 'false';
+        echo "Query Result: $resultString\n";
 
         return $result;
     }
@@ -117,56 +115,155 @@ class UserDataFactory implements IUserDataFactory {
 
         $query = sprintf("DELETE FROM `Hippo`.`User` WHERE `UserId`='%s'", $userId);
 
-        echo "\nQuery: ";
-        echo $query;
+        echo "Query: $query\n";
 
         $result = $this->_dbContext->query($query);
-
-        echo "\nResult: ";
-        var_dump($result);
+        
+        $resultString = $result ? 'true' : 'false';
+        echo "Query Result: $resultString\n";
 
         return $result;
     }
 };
 
-class VendorDataFactory implements IVendorDataFactory {
+class ProviderDataFactory implements IProviderDataFactory {
 
 	private $_dbContext;
 
     public function __construct(IDataConnectionFactory $connectionFactory) {
-       $this->_dbContext = $connectionFactory->GetDataContext();      
+       $this->_dbContext = $connectionFactory->GetSharedConnection()->GetDataContext();      
         
     }
 
-    public function GetAllProviders($zipCode) {
-    	$query = sprintf("SELECT * FROM vendor WHERE zip='%s'", $zipCode);
+    private function GetAllProvidersInternal($query) {
         $result = $this->_dbContext->query($query);
 
-        $myArray = array();
+        if (!$result) {
+            echo "Error executing query: $query. Result: $result" . $this->_dbContext->error;
+            return null;
+        }
+
+        if ($result->num_rows == 0) {
+            return null;
+        }
+
+        $providerList = array();
         
         while($row = $result->fetch_array(MYSQL_ASSOC)) {
-            $myArray[] = $row;
+            $providerList[] = Provider::CreateProvider($row["Name"], 
+                $row["Id"], 
+                $row["UserId"], 
+                $row["Description"], 
+                $row["ZipCode"]
+                );
         }
 
         $result->close();
+
+        return $providerList; 
+    }
+
+    public function GetAllProvidersByName($providerName) {
+        $query = sprintf("SELECT * FROM provider WHERE Name='%s'", $providerName);
+        return $this->GetAllProvidersInternal($query);        
+    }
+
+
+    public function GetAllProviders($zipCode) {
+    	$query = sprintf("SELECT * FROM provider WHERE ZipCode='%s'", $zipCode);
+        return $this->GetAllProvidersInternal($query);        
     }
 
     public function GetProvidersByType($zipcode, ProvideType $type)  {
-    	$query = sprintf("SELECT * FROM vendor WHERE type='%s' and zip=%s'", $type, $zipCode);
-        $result = $this->_dbContext->query($query);
-
-        $myArray = array();
+        if(!isset($zipCode) and !isset($zipCode))
+        {
+            throw new \Exception("Cannot get Providers. Please specify atleast one search option. Zip code or Provider Type");
+        }
         
-        while($row = $result->fetch_array(MYSQL_ASSOC)) {
-            $myArray[] = $row;
+        unset($queryBuilderVariables);
+
+        $queryBase = "SELECT * FROM `provider`  P
+                                join provideraddress PA on P.AddressId = PA.AddressId
+                                Join ProviderTypeMapping PTM on PTM.ProviderId = P.Id
+                                join ProvideType PT on PT.ProviderTypeId = PTM.TypeId";
+
+        if($zipCode)
+        {
+            $queryBuilderVariables[] = " PA.ZipCode = '$zipCode'";
         }
 
-        $result->close();
+        if($type)
+        {
+            $queryBuilderVariables[] = " PTM.TypeId = '$type'";
+        }
 
+        if (!empty($queryBuilderVariables)) {
+            $queryBase .= ' WHERE ' . implode(' AND ', $queryBuilderVariables);
+        }
+        return GetAllProvidersInternal($query);        
     }
     
-    public function AddVendor(Vendor $vendor) {
+    public function AddProvider(Provider $provider) {
+        if (!isset($provider)) {
+            return false;
+        }
 
+        $addressId = NULL;
+
+        if ($provider->m_address != null) {
+            $addressId = $provider->$Address->$m_id;
+        }
+
+        $addressId = 'NULL';
+
+        if ($provider->m_userId == null) {
+            throw new \Exception("Cannot add Provider. Please specify user id");
+        }
+
+        if ($provider->m_providerName == null) {
+            throw new \Exception("Cannot add Provider. Please specify provider name");
+        }
+
+        if ($provider->m_description == null) {
+            throw new \Exception("Cannot add Provider. Please specify provider description.");
+        }      
+
+        if ($provider->m_zipCode == null) {
+            throw new \Exception("Cannot add Provider. Please specify provider zip code.");
+        }    
+
+        $query = "INSERT INTO `Hippo`.`provider` (`UserId`, `AddressId`, `Name`, `Description`, `ZipCode`)
+                VALUES ($provider->m_userId, $addressId, '$provider->m_providerName', '$provider->m_description', '$provider->m_zipCode');";
+
+        echo "\nQuery: $query\n";
+
+        $result = $this->_dbContext->query($query);
+
+        if (!$result) {
+            echo "Error executing query: $query. Result: $result" . $this->_dbContext->error;
+            return $result;
+        }
+
+        echo "Added provider $provider->m_providerName\n";
+
+        return $result;
+    }
+
+    public function DeleteProviderById($providerId) {
+        if (!isset($providerId)) {
+            return false;
+        }
+
+        $query = sprintf("DELETE FROM `Hippo`.`provider` WHERE `Id`='%s'", $providerId);
+
+        echo "\nDelete Query: $query\n";
+
+        $result = $this->_dbContext->query($query);
+
+        $resultString = $result ? 'true' : 'false';
+        echo "\nDeleted Query Result: $resultString\n";
+
+        return $result;
     }
 };
 

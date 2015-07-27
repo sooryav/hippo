@@ -86,22 +86,33 @@ INSERT INTO `country` (`CountryCode`, `CountryName`) VALUES
 
 CREATE TABLE IF NOT EXISTS `provider` (
   `Id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `AddressId` bigint(20) unsigned NOT NULL,
+  `UserId` bigint(20) unsigned NOT NULL,
+  `AddressId` bigint(20) unsigned,
   `Name` varchar(100) NOT NULL,
   `Description` text NOT NULL,
-  `ContactId` bigint(20) unsigned NOT NULL,
-  `ProviderFeatureId` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`Id`),
-  UNIQUE KEY `ProviderFeatureId` (`ProviderFeatureId`)
+  `ZipCode` varchar(25) NOT NULL,
+  PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `provider`
 --
 
-INSERT INTO `provider` (`Id`, `AddressId`, `Name`, `Description`, `ContactId`, `ProviderFeatureId`) VALUES
-(1, 1, 'Hyatt Regency', 'Set 5 blocks from Highway 405, this upscale high-rise hotel is 11.1 miles from downtown Seattle. \r\n\r\nModern, refined rooms feature flat-screen TVs, iPod docks, WiFi (fee), minifridges, and tea and coffeemaking facilities. Upgraded rooms offer floor-to-ceiling windows and/or mountain views, and club rooms provide access to a lounge with free WiFi and continental breakfast. Suites add separate living rooms with pull-out sofas.\r\n\r\nAmong several dining options are a Northwest restaurant, a casual brunch spot, a cocktail bar and a steakhouse with a piano bar. Amenities include a 24/7 fitness center, a heated indoor pool and 70,000 sq ft of event space.', 1, 1),
-(2, 2, 'New Delhi Palace', 'Indian Restaurant', 2, 2);
+INSERT INTO `provider` (`Id`, `UserId`, `AddressId`, `Name`, `Description`, `ZipCode`) VALUES
+(1, 1, 1, 'Hyatt Regency', 'Set 5 blocks from Highway 405, this upscale high-rise hotel is 11.1 miles from downtown Seattle. \r\n\r\nModern, refined rooms feature flat-screen TVs, iPod docks, WiFi (fee), minifridges, and tea and coffeemaking facilities. Upgraded rooms offer floor-to-ceiling windows and/or mountain views, and club rooms provide access to a lounge with free WiFi and continental breakfast. Suites add separate living rooms with pull-out sofas.\r\n\r\nAmong several dining options are a Northwest restaurant, a casual brunch spot, a cocktail bar and a steakhouse with a piano bar. Amenities include a 24/7 fitness center, a heated indoor pool and 70,000 sq ft of event space.', '98004'),
+(2, 2, 2, 'New Delhi Palace', 'Indian Restaurant','98007');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `providerdescriptiontable`
+--
+CREATE TABLE IF NOT EXISTS `providerdescriptiontable` (
+  `Id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Description` text NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
 
 -- --------------------------------------------------------
 
@@ -116,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `provideraddress` (
   `City` varchar(50) NOT NULL,
   `State` varchar(50) NOT NULL,
   `CountryCode` varchar(50) NOT NULL,
-  `ZipCode` varchar(50) NOT NULL,
+  `ZipCode` varchar(25) NOT NULL,
   `PnoneNumber` varchar(50) NOT NULL,
   `Latitude` float(10,6) NOT NULL DEFAULT '0.000000',
   `Longitude` float(10,6) NOT NULL DEFAULT '0.000000',
@@ -128,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `provideraddress` (
 --
 
 INSERT INTO `provideraddress` (`AddressId`, `Address1`, `Address2`, `City`, `State`, `CountryCode`, `ZipCode`, `PnoneNumber`, `Latitude`, `Longitude`) VALUES
-(1, '900 Bellevue Way NE', '', 'Bellevue', 'WA', 'USA', '98004', '425) 462-1234', 0.000000, 0.000000),
+(1, '900 Bellevue Way NE', '', 'Bellevue', 'WA', 'USA', '98004', '425 462 1234', 0.000000, 0.000000),
 (2, '4125 N E 20th St', '', 'Bellevue', 'WA', 'USA', '98007', '4257836987', 0.000000, 0.000000);
 
 -- --------------------------------------------------------

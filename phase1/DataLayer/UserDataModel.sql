@@ -9,11 +9,11 @@ USE Hippo;
 -- Table structure for table `contact`
 --
 CREATE TABLE `User` (
-  `UserId` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `UserName` varchar(45) DEFAULT NULL,
   `Password` varchar(45) DEFAULT NULL,
   `Token` varbinary(256) DEFAULT NULL,
-  `ActivationTokenId` int(11) DEFAULT NULL,
+  `ActivationTokenId` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

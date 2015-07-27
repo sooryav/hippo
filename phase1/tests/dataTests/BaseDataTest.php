@@ -6,12 +6,12 @@ namespace DataAccessLayer;
 require_once(__DIR__ . '/../../DataLayer/MySqlDataFatory.php');
 require_once(__DIR__ . '/../../DataLayer/DataImpl.php');
 
-class BaseDataConnectivityTest extends \PHPUnit_Framework_TestCase {
+class DataTests extends \PHPUnit_Framework_TestCase {
 
   public function testUserData() {
     $userName = 'HippoTestUser1';
 
-    echo 'Starting test';
+    echo 'Starting User test';
     echo "\n";
 
     $dataConnectionFactory = new \DataAccessLayer\MySqlDataConnectionFactory();
@@ -39,10 +39,61 @@ class BaseDataConnectivityTest extends \PHPUnit_Framework_TestCase {
     
     $user = $userFactory->GetUserByName($userName);
 
-    var_dump($user);
-
     $this->assertEquals($user->m_userName, $userName);
   }
 
+  public function testProviderData() {
+    $providerName = 'HippoTestProvider1';
+    $zipCode = '98007';
+
+    echo "Starting Provider test\n";
+
+    $dataConnectionFactory = new \DataAccessLayer\MySqlDataConnectionFactory();
+    $dataFactory = new \DataAccessLayer\DataFactory();
+
+    $providerFactory = $dataFactory->GetProviderDataFactory($dataConnectionFactory);
+
+    $providerList = $providerFactory->GetAllProviders($zipCode);
+    echo "Found existing providers with Zip code name $zipCode\n";
+
+    $providerList = $providerFactory->GetAllProvidersByName($providerName);
+      
+    $existingProviderCount = count($providerList);
+
+    if ($existingProviderCount != 0) {
+      echo "Found existing providers with user name $providerName with count: $existingProviderCount\n";
+
+      foreach($providerList as $provider) {
+        $providerFactory->DeleteProviderById($provider->m_providerId);
+      }
+    }
+
+    $provider = new Provider();
+    $provider->m_providerName = $providerName;
+    $provider->m_userId = 1;
+    $provider->m_description = "This is a test vendor";
+    $provider->m_zipCode = $zipCode;
+
+    $result = false;
+    echo "Test: Adding Provider\n";
+
+    try {
+      $result = $providerFactory->AddProvider($provider);
+    } catch(Exception $e) {
+      echo "Exception caught while adding provider: $e->getMessage()";
+    }
+
+    echo "Test: Added Provider\n";
+
+    $this->assertEquals($result, true);
+    
+    $providerList = $providerFactory->GetAllProvidersByName($providerName);
+
+    $this->assertEquals($providerList[0]->m_providerName, $providerName);
+  }
+
 }
+
+
+
 
