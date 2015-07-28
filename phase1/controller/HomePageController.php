@@ -20,7 +20,7 @@ class HomePageController extends ControllerBase {
       die();
     }
 
-    return <home:page:view context={$this->getContext()} />;
+    return <home:page:view logged_in_user={$this->getContext()->getLoggedInUser()} />;
   }
 
 }

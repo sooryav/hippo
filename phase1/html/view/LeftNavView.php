@@ -5,18 +5,14 @@ require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 
 class :left-nav:view extends :x:element {
   attribute
-    \Core\Context context = null,
-    \Model\LoggedInUser user = null;
+    \Model\LoggedInUser logged_in_user = null;
 
   public function render() {
-    $context = $this->getAttribute('context');
-    if (!\Model\Util::securePage($context, $_SERVER['PHP_SELF'])) {
-      die();
-    }
+    $loggedInUser = $this->getAttribute('logged_in_user');
 
     $view = <div id="left-nav"/>;
     //Links for logged in user
-    if(\Model\Util::isUserLoggedIn($context)) {
+    if($loggedInUser) {
       $view->appendChild(
         <ul class="list-unstyled">
           <li><a href="/account">Account Home</a></li>
@@ -25,7 +21,7 @@ class :left-nav:view extends :x:element {
         </ul>
       );
       //Links for permission level 2 (default admin)
-      if ($context->getLoggedInUser()->checkPermission(array(2))){
+      if ($loggedInUser->checkPermission(array(2))){
         $view->appendChild(
           <ul class="list-unstyled">
             <li><a href="/admin_configuration">Admin Configuration</a></li>

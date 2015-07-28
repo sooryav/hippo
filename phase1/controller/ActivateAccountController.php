@@ -46,7 +46,7 @@ class ActivateAccountController extends ControllerBase {
     }
     return
     <activate:account:page:view
-      context={$context}
+      logged_in_user={$context->getLoggedInUser()}
       errors={$errors}
       successes={$successes}
     />;

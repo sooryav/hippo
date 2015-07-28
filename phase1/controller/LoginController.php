@@ -86,7 +86,7 @@ class LoginController extends ControllerBase {
         }
       }
     }
-    return <login:page:view context={$context} errors={$errors} />;
+    return <login:page:view logged_in_user={$context->getLoggedInUser()} errors={$errors} />;
   }
 
 }

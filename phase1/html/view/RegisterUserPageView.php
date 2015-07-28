@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 
 class :register:user:page:view extends :x:page:view {
   attribute
-    \Core\Context context = null,
+    \Model\LoggedInUser logged_in_user = null,
     array errors = array(),
     array successes = array();
 
@@ -31,7 +31,7 @@ class :register:user:page:view extends :x:page:view {
             <br />
             <table><tr>
             <td style="margin-right:20%;vertical-align:top;">
-              <left-nav:view context={$this->getAttribute('context')}/>
+              <left-nav:view logged_in_user={$this->getAttribute('logged_in_user')}/>
             </td>
             <td style="padding-left:20%">
               <div id="main">

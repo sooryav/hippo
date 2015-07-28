@@ -25,7 +25,10 @@ class AccountController extends ControllerBase {
       die();
     }
 
-    return <account:page:view context={$this->getContext()} />;
+    return
+      <account:page:view
+        logged_in_user={$this->getContext()->getLoggedInUser()}
+      />;
   }
 
 }
