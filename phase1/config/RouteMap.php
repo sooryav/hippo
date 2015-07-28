@@ -5,7 +5,7 @@ namespace Config;
 class RouteMap {
 
 // Defines the routing mapping from the request URI to the controller.
-public static Map<string, string> $s_map = Map {
+public static ImmMap<string, string> $s_map = ImmMap {
   "/account" => "AccountController",
   "/activate_account" => "ActivateAccountController",
   "/dashboard" => "DashboardController",
