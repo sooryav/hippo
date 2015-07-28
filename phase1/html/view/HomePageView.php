@@ -30,7 +30,7 @@ class :home:page:view extends :x:page:view {
       $loginButton =
         <button
           type="button"
-          onclick="location.href='/register_user';"
+          onclick="location.href='/login';"
           style="margin-left:2%"
           class="btn btn-sm btn-success">
             {"Login"}
