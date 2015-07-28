@@ -3,6 +3,7 @@
 namespace Model;
 
 require_once(__DIR__. '/Util.php');
+require_once(__DIR__ . '/../config/SiteConfig.php');
 
 class LoggedInUser {
   public $email = null;
@@ -20,7 +21,7 @@ class LoggedInUser {
   //Simple function to update the last sign in of a user
   public function updateLastSignIn() {
     $mysqli = $this->m_context->getDBConnection();
-    $db_table_prefix = $this->m_context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $time = time();
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."users
       SET
@@ -35,7 +36,7 @@ class LoggedInUser {
   //Return the timestamp when the user registered
   public function signupTimeStamp() {
     $mysqli = $this->m_context->getDBConnection();
-    $db_table_prefix = $this->m_context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $timestamp = time();
     $stmt = $mysqli->prepare("SELECT sign_up_stamp
       FROM ".$db_table_prefix."users
@@ -51,7 +52,7 @@ class LoggedInUser {
   //Update a users password
   public function updatePassword($pass) {
     $mysqli = $this->m_context->getDBConnection();
-    $db_table_prefix = $this->m_context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $secure_pass = generateHash($pass);
     $this->hash_pw = $secure_pass;
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."users
@@ -67,7 +68,7 @@ class LoggedInUser {
   //Update a users email
   public function updateEmail($email) {
     $mysqli = $this->m_context->getDBConnection();
-    $db_table_prefix = $this->m_context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $this->email = $email;
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."users
       SET
@@ -82,8 +83,8 @@ class LoggedInUser {
   //Is a user has a permission
   public function checkPermission($permission) {
     $mysqli = $this->m_context->getDBConnection();
-    $db_table_prefix = \Core\Context::DB_TABLE_PREFIX;
-    $master_account = \Core\Context::MASTER_ACCOUNT;
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
+    $master_account = \Config\SiteConfig::MASTER_ACCOUNT;
     //Grant access if master user
 
     $stmt = $mysqli->prepare("SELECT id

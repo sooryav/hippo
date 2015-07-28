@@ -45,7 +45,7 @@ class LoginController extends ControllerBase {
         $errors[] = \Model\Util::lang("ACCOUNT_SPECIFY_PASSWORD");
       }
 
-      if(count($context->getErrors()) == 0) {
+      if(count($errors) == 0) {
         //A security note here, never tell the user which credential was incorrect
         if(!\Model\Util::usernameExists($context, $username)) {
           $errors[] = \Model\Util::lang("ACCOUNT_USER_OR_PASS_INVALID");
@@ -76,7 +76,7 @@ class LoginController extends ControllerBase {
 
               //Update last sign in
               $loggedInUser->updateLastSignIn();
-              $context->setLoggedInUser($loggedInUser);
+              $context->getRequest()->setLoggedInUser($loggedInUser);
 
               //Redirect to user account page
               header("Location: /account");
@@ -86,7 +86,11 @@ class LoginController extends ControllerBase {
         }
       }
     }
-    return <login:page:view logged_in_user={$context->getLoggedInUser()} errors={$errors} />;
+    return
+      <login:page:view
+        logged_in_user={$context->getRequest()->getLoggedInUser()}
+        errors={$errors}
+      />;
   }
 
 }

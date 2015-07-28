@@ -1,6 +1,7 @@
 <?hh
 
 require_once(__DIR__ . '/../../model/Util.php');
+require_once(__DIR__ . '/../../config/SiteConfig.php');
 require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
 
 class :left-nav:view extends :x:element {
@@ -34,7 +35,7 @@ class :left-nav:view extends :x:element {
     } else {
       //Links for users not logged in
       $resendActivation =
-        \Core\Context::EMAIL_ACTIVATION ?
+        \Config\SiteConfig::EMAIL_ACTIVATION ?
         <li><a href="/resend-activation">Resend Activation Email</a></li> :
         null;
       $view->appendChild(

@@ -35,7 +35,7 @@ class UserSettingsController extends ControllerBase {
       $password_confirm = $_POST["passwordcheck"];
       
       $email = $_POST["email"];
-      $loggedInUser = $context->getLoggedInUser();
+      $loggedInUser = $context->getRequest()->getLoggedInUser();
       
       //Perform some validation
       //Feel free to edit / change as required
@@ -97,7 +97,12 @@ class UserSettingsController extends ControllerBase {
       }
     }
    
-    return <user:settings:page:view logged_in_user={$context->getLoggedInUser()} errors={$errors} successes={$successes} />;
+    return
+      <user:settings:page:view
+         logged_in_user={$context->getRequest()->getLoggedInUser()}
+         errors={$errors}
+         successes={$successes}
+      />;
   }
 
 }

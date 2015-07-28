@@ -16,11 +16,14 @@ class HomePageController extends ControllerBase {
   <<Override>>
   public function render(): :x:element {
 
-    if (!\Model\Util::securePage($this->getContext(), $_SERVER['PHP_SELF'])){
+    if (!\Model\Util::securePage($this->getContext(), $_SERVER['PHP_SELF'])) {
       die();
     }
 
-    return <home:page:view logged_in_user={$this->getContext()->getLoggedInUser()} />;
+    return
+      <home:page:view
+        logged_in_user={$this->getContext()->getRequest()->getLoggedInUser()}
+      />;
   }
 
 }

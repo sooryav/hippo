@@ -45,11 +45,11 @@ class ActivateAccountController extends ControllerBase {
       $successes[] = \Model\Util::lang("ACCOUNT_ACTIVATION_COMPLETE");
     }
     return
-    <activate:account:page:view
-      logged_in_user={$context->getLoggedInUser()}
-      errors={$errors}
-      successes={$successes}
-    />;
+      <activate:account:page:view
+        logged_in_user={$context->getRequest()->getLoggedInUser()}
+        errors={$errors}
+        successes={$successes}
+      />;
 
   }
 

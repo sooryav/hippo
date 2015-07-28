@@ -3,6 +3,7 @@
 namespace Model;
 
 require_once(__DIR__. '/Util.php');
+require_once(__DIR__ . '/../config/SiteConfig.php');
 
 class User {
   public $user_active = 0;
@@ -53,14 +54,14 @@ class User {
       $this->activation_token = Util::generateActivationToken($this->m_context);
 
       //Do we need to send out an activation email?
-      if(\Core\Context::EMAIL_ACTIVATION == "true") {
+      if(\Config\SiteConfig::EMAIL_ACTIVATION == "true") {
         //User must activate their account first
         $this->user_active = 0;
 
         $mail = new userCakeMail();
 
         //Build the activation message
-        $activation_message = Util::lang("ACCOUNT_ACTIVATION_MESSAGE",array(\Core\Context::WEBSITE_URL,$this->activation_token));
+        $activation_message = Util::lang("ACCOUNT_ACTIVATION_MESSAGE",array(\Config\SiteConfig::WEBSITE_URL, $this->activation_token));
 
         //Define more if you want to build larger structures
         $hooks = array(
@@ -92,7 +93,7 @@ class User {
       if(!$this->mail_failure) {
         //Insert the user into the database providing no errors have been found.
         $mysqli = $this->m_context->getDBConnection();
-        $db_table_prefix = $this->m_context->getDBTablePrefix();
+        $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
         $stmt = $mysqli->prepare("INSERT INTO ".$db_table_prefix."users (
           user_name,
           display_name,

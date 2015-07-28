@@ -98,7 +98,7 @@ class RegisterUserController extends ControllerBase {
 
     return
       <register:user:page:view
-        logged_in_user={$context->getLoggedInUser()}
+        logged_in_user={$context->getRequest()->getLoggedInUser()}
         errors={$errors}
         successes={$successes}
        />;

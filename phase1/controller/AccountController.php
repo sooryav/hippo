@@ -27,7 +27,7 @@ class AccountController extends ControllerBase {
 
     return
       <account:page:view
-        logged_in_user={$this->getContext()->getLoggedInUser()}
+        logged_in_user={$this->getContext()->getRequest()->getLoggedInUser()}
       />;
   }
 

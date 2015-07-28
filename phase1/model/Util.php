@@ -4,6 +4,7 @@ namespace Model;
 
 require_once(__DIR__ . '/../core/Context.php');
 require_once(__DIR__ . '/../html/languages/en.php');
+require_once(__DIR__ . '/../config/SiteConfig.php');
 
 //Functions that do not interact with DB
 //------------------------------------------------------------------------------
@@ -116,15 +117,6 @@ class Util {
     return false;
   }
 
-  //Replaces hooks with specified text
-  public static function replaceDefaultHook(\Core\Context $context, $str) {
-    return str_replace(
-      $context->getDefaultHooks(),
-      $context->getDefaultReplace(),
-      $str
-    );
-  }
-
   //Displays error and success messages
   public static function resultBlock($errors,$successes) {
     //Error block
@@ -173,7 +165,7 @@ class Util {
   //Delete a defined array of users
   public static function deleteUsers(\Core\Context $context, $users) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $i = 0;
     $stmt = $mysqli->prepare("DELETE FROM ".$db_table_prefix."users
       WHERE id = ?");
@@ -194,7 +186,7 @@ class Util {
   //Check if a display name exists in the DB
   public static function displayNameExists(\Core\Context $context, $displayname) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT active
       FROM ".$db_table_prefix."users
       WHERE
@@ -216,7 +208,7 @@ class Util {
   //Check if an email exists in the DB
   public static function emailExists(\Core\Context $context, $email) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT active
       FROM ".$db_table_prefix."users
       WHERE
@@ -238,7 +230,7 @@ class Util {
   //Check if a user name and email belong to the same user
   public static function emailUsernameLinked(\Core\Context $context, $email,$username) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT active
       FROM ".$db_table_prefix."users
       WHERE user_name = ?
@@ -262,7 +254,7 @@ class Util {
   //Retrieve information for all users
   public static function fetchAllUsers(\Core\Context $context) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT
       id,
       user_name,
@@ -340,7 +332,7 @@ class Util {
       $data = $id;
     }
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT
       id,
       user_name,
@@ -411,7 +403,7 @@ class Util {
   //Toggle if lost password request flag on or off
   public static function flagLostPasswordRequest(\Core\Context $context, $username,$value) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."users
       SET lost_password_request = ?
       WHERE
@@ -427,8 +419,8 @@ class Util {
   //Check if a user is logged in
   public static function isUserLoggedIn(\Core\Context $context) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
-    $loggedInUser = $context->getLoggedInUser();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
+    $loggedInUser = $context->getRequest()->getLoggedInUser();
     $stmt = $mysqli->prepare("SELECT
       id,
       password
@@ -461,7 +453,7 @@ class Util {
   //Change a user from inactive to active
   public static function setUserActive(\Core\Context $context, $token) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."users
       SET active = 1
       WHERE
@@ -476,7 +468,7 @@ class Util {
   //Change a user's display name
   public static function updateDisplayName(\Core\Context $context, $id, $display) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."users
       SET display_name = ?
       WHERE
@@ -491,7 +483,7 @@ class Util {
   //Update a user's email
   public static function updateEmail(\Core\Context $context, $id, $email) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."users
       SET
       email = ?
@@ -506,7 +498,7 @@ class Util {
   //Input new activation token, and update the time of the most recent activation request
   public static function updateLastActivationRequest(\Core\Context $context, $new_activation_token,$username,$email) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."users
       SET activation_token = ?,
       last_activation_request = ?
@@ -522,7 +514,7 @@ class Util {
   //Generate a random password, and new token
   public static function updatePasswordFromToken(\Core\Context $context, $pass,$token) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $new_activation_token = self::generateActivationToken($context);
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."users
       SET password = ?,
@@ -538,7 +530,7 @@ class Util {
   //Update a user's title
   public static function updateTitle(\Core\Context $context, $id, $title) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."users
       SET
       title = ?
@@ -553,7 +545,7 @@ class Util {
   //Check if a user ID exists in the DB
   public static function userIdExists(\Core\Context $context, $id) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT active
       FROM ".$db_table_prefix."users
       WHERE
@@ -575,7 +567,7 @@ class Util {
   //Checks if a username exists in the DB
   public static function usernameExists(\Core\Context $context, $username) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT active
       FROM ".$db_table_prefix."users
       WHERE
@@ -597,7 +589,7 @@ class Util {
   //Check if activation token exists in DB
   public static function validateActivationToken(\Core\Context $context, $token, $lostpass=null) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     if($lostpass == NULL) {
       $stmt = $mysqli->prepare("SELECT active
         FROM ".$db_table_prefix."users
@@ -634,7 +626,7 @@ class Util {
   //Create a permission level in DB
   public static function createPermission(\Core\Context $context, $permission) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("INSERT INTO ".$db_table_prefix."permissions (
       name
       )
@@ -648,10 +640,11 @@ class Util {
   }
 
   //Delete a permission level from the DB
-  public static function deletePermission(\Core\Context $context, $permission) {
+  public static function deletePermission(\Core\Context $context, $permission) : array {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $i = 0;
+    $errors = array();
     $stmt = $mysqli->prepare("DELETE FROM ".$db_table_prefix."permissions
       WHERE id = ?");
     $stmt2 = $mysqli->prepare("DELETE FROM ".$db_table_prefix."user_permission_matches
@@ -660,9 +653,9 @@ class Util {
       WHERE permission_id = ?");
     foreach ($permission as $id) {
       if ($id == 1) {
-        $context->appendError(self::lang("CANNOT_DELETE_NEWUSERS"));
+        $errors[] = self::lang("CANNOT_DELETE_NEWUSERS");
       } elseif ($id == 2) {
-        $context->appendError(self::lang("CANNOT_DELETE_ADMIN"));
+        $errors[] = self::lang("CANNOT_DELETE_ADMIN");
       } else{
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -676,13 +669,13 @@ class Util {
     $stmt->close();
     $stmt2->close();
     $stmt3->close();
-    return $i;
+    return $errors;
   }
 
   //Retrieve information for all permission levels
   public static function fetchAllPermissions(\Core\Context $context) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT
       id,
       name
@@ -702,7 +695,7 @@ class Util {
   //Retrieve information for a single permission level
   public static function fetchPermissionDetails(\Core\Context $context, $id) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT
       id,
       name
@@ -726,7 +719,7 @@ class Util {
   //Check if a permission level ID exists in the DB
   public static function permissionIdExists(\Core\Context $context, $id) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT id
       FROM ".$db_table_prefix."permissions
       WHERE
@@ -748,7 +741,7 @@ class Util {
   //Check if a permission level name exists in the DB
   public static function permissionNameExists(\Core\Context $context, $permission) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT id
       FROM ".$db_table_prefix."permissions
       WHERE
@@ -770,7 +763,7 @@ class Util {
   //Change a permission level's name
   public static function updatePermissionName(\Core\Context $context, $id, $name) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."permissions
       SET name = ?
       WHERE
@@ -788,7 +781,7 @@ class Util {
   //Match permission level(s) with user(s)
   public static function addPermission(\Core\Context $context, $permission, $user) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $i = 0;
     $stmt = $mysqli->prepare("INSERT INTO ".$db_table_prefix."user_permission_matches (
       permission_id,
@@ -822,7 +815,7 @@ class Util {
   //Retrieve information for all user/permission level matches
   public static function fetchAllMatches(\Core\Context $context) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT
       id,
       user_id,
@@ -844,7 +837,7 @@ class Util {
   //Retrieve list of permission levels a user has
   public static function fetchUserPermissions(\Core\Context $context, $user_id) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT
       id,
       permission_id
@@ -869,7 +862,7 @@ class Util {
   //Retrieve list of users who have a permission level
   public static function fetchPermissionUsers(\Core\Context $context, $permission_id) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT id, user_id
       FROM ".$db_table_prefix."user_permission_matches
       WHERE permission_id = ?
@@ -892,7 +885,7 @@ class Util {
   //Unmatch permission level(s) from user(s)
   public static function removePermission(\Core\Context $context, $permission, $user) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $i = 0;
     $stmt = $mysqli->prepare("DELETE FROM ".$db_table_prefix."user_permission_matches
       WHERE permission_id = ?
@@ -924,7 +917,7 @@ class Util {
   //Update configuration table
   public static function updateConfig(\Core\Context $context, $id, $value) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."configuration
       SET
       value = ?
@@ -943,7 +936,7 @@ class Util {
   //Add a page to the DB
   public static function createPages(\Core\Context $context, $pages) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("INSERT INTO ".$db_table_prefix."pages (
       page
       )
@@ -960,7 +953,7 @@ class Util {
   //Delete a page from the DB
   public static function deletePages(\Core\Context $context, $pages) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("DELETE FROM ".$db_table_prefix."pages
       WHERE id = ?");
     $stmt2 = $mysqli->prepare("DELETE FROM ".$db_table_prefix."permission_page_matches
@@ -978,7 +971,7 @@ class Util {
   //Fetch information on all pages
   public static function fetchAllPages(\Core\Context $context) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT
       id,
       page,
@@ -1002,7 +995,7 @@ class Util {
   //Fetch information for a specific page
   public static function fetchPageDetails(\Core\Context $context, $id) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT
       id,
       page,
@@ -1028,7 +1021,7 @@ class Util {
   //Check if a page ID exists
   public static function pageIdExists(\Core\Context $context, $id) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT private
       FROM ".$db_table_prefix."pages
       WHERE
@@ -1050,7 +1043,7 @@ class Util {
   //Toggle private/public setting of a page
   public static function updatePrivate(\Core\Context $context, $id, $private) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("UPDATE ".$db_table_prefix."pages
       SET
       private = ?
@@ -1068,7 +1061,7 @@ class Util {
   //Match permission level(s) with page(s)
   public static function addPage(\Core\Context $context, $page, $permission) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $i = 0;
     $stmt = $mysqli->prepare("INSERT INTO ".$db_table_prefix."permission_page_matches (
       permission_id,
@@ -1102,7 +1095,7 @@ class Util {
   //Retrieve list of permission levels that can access a page
   public static function fetchPagePermissions(\Core\Context $context, $page_id) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT
       id,
       permission_id
@@ -1127,7 +1120,7 @@ class Util {
   //Retrieve list of pages that a permission level can access
   public static function fetchPermissionPages(\Core\Context $context, $permission_id) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $stmt = $mysqli->prepare("SELECT
       id,
       page_id
@@ -1152,7 +1145,7 @@ class Util {
   //Unmatched permission and page
   public static function removePage(\Core\Context $context, $page, $permission) {
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
     $i = 0;
     $stmt = $mysqli->prepare("DELETE FROM ".$db_table_prefix."permission_page_matches
       WHERE page_id = ?
@@ -1184,8 +1177,8 @@ class Util {
     $tokens = explode('/', $uri);
     $page = $tokens[count($tokens)-1];
     $mysqli = $context->getDBConnection();
-    $db_table_prefix = $context->getDBTablePrefix();
-    $loggedInUser = $context->getLoggedInUser();
+    $db_table_prefix = \Model\DatabaseHandler::getDBTablePrefix();
+    $loggedInUser = $context->getRequest()->getLoggedInUser();
     //retrieve page details
     $stmt = $mysqli->prepare("SELECT
       id,
@@ -1236,7 +1229,7 @@ class Util {
       //Check if user's permission levels allow access to page
       if ($loggedInUser->checkPermission($pagePermissions)) {
         return true;
-      } elseif ($loggedInUser->user_id == \Core\Context::MASTER_ACCOUNT) {
+      } elseif ($loggedInUser->user_id == \Config\SiteConfig::MASTER_ACCOUNT) {
         //Grant access if master user
         return true;
       } else {

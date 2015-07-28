@@ -27,7 +27,7 @@ class LogoutController extends ControllerBase {
 
     //Log the user out
     if (\Model\Util::isUserLoggedIn($context)) {
-      $context->getLoggedInUser()->userLogOut();
+      $context->getRequest()->getLoggedInUser()->userLogOut();
     }
 
     header("Location: /login");
