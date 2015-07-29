@@ -14,7 +14,8 @@ class RequestParamsTest extends \PHPUnit_Framework_TestCase {
         "testInt" => 2,
         "testFloatStr" => "1.5",
         "testFloat" => 2.5
-      });
+      }
+    );
     
     $this->assertEquals("world", $requestParams->getString("hello"));
     $this->assertEquals(null, $requestParams->getInt("hello"));
