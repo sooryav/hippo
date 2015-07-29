@@ -9,25 +9,27 @@ class RequestParams {
   }
 
   public function getString(string $name): ?string {
-    return (string)$this->get<string>('is_string', $name);
+    return (string)$this->get(fun('is_string'), $name);
   } 
 
   public function getInt(string $name): ?int {
-    return (int)$this->get<int>('is_numeric', $name);
+    return (int)$this->get(fun('is_numeric'), $name);
   } 
 
   public function getFloat(string $name): ?float {
-    return (float)$this->get<float>('is_numeric', $name);
+    return (float)$this->get(fun('is_numeric'), $name);
   } 
 
-  private function get<T>(string $funcName, string $paramName): ?T {
+  // TODO: not sure how to specify the type for $func and
+  // return type of this function.
+  private function get($func, string $paramName) {
     if (!$this->m_params->contains($paramName)) {
       return null;
     }
 
     $param = $this->m_params[$paramName];
 
-    if (!call_user_func($funcName, $param)) {
+    if (!call_user_func($func, $param)) {
       return null;
     }
     
