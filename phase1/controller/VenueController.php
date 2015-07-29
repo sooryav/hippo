@@ -9,36 +9,34 @@ require_once(__DIR__ . '/../html/ui/VenueListElement.php');
 
 class VenueController extends ControllerBase {
 
-  public function __construct(\Core\Context $context, Map<string, string> $inputs) {
-    parent::__construct(get_class($this), '/venues', $context, $inputs);
+  public function __construct(\Core\Context $context) {
+    parent::__construct(get_class($this), '/venues', $context);
   }
 
   <<Override>>
   public function render(): :x:element {
-    $params = $this->getContext()->m_request->m_params;
     $venueModel = new \Model\VenueModel();
-    $view = null;
+    $curPage = $this->getRequestParams()->getInt('page');
 
     // The first time this page is being loaded.
-    if (!isset($params['page']))
+    if (is_null($curPage))
     { 
-      $view =
+      return
         <ui:venues:view
-          totalVenuesCount={$venueModel->getTotalVenuesCount()}/>;
+          totalVenuesCount={$venueModel->getTotalVenuesCount()}
+        />;
     }
     // The request is AJAX call to get venues information.
     else
     {
-      $curPage = $params['page']; 
-
-      $view =
+      return
         <ui:venue-list
           venues={$venueModel->getVenues()}
           id="venuesContainer"
-          createContainer={$curPage == 0} />;
+          createContainer={$curPage == 0}
+        />;
     }
-    return $view;
-
   }
+
 }
 

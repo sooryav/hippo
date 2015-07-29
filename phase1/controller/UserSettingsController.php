@@ -9,8 +9,8 @@ require_once(__DIR__ . '/../core/Context.php');
 
 class UserSettingsController extends ControllerBase {
 
-  public function __construct(\Core\Context $context, Map<string, string> $inputs) {
-    parent::__construct(get_class($this), '/user_settings', $context, $inputs);
+  public function __construct(\Core\Context $context) {
+    parent::__construct(get_class($this), '/user_settings', $context);
   }
 
   <<Override>>

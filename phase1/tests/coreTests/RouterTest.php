@@ -9,13 +9,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
 
   public function testRouterWithUnknownKey() {
     $router = new \Core\Router(ImmMap{});
-    $request = new \Core\Request("foo", Map{});
+    $request = new \Core\Request("foo", new \Core\RequestParams(Map{}));
     $context = new \Core\Context(
       new \Tests\Mock\MockLogger(),
       $request);
 
     try {
-      $router->route(__DIR__, $context, $request);
+      $router->route(__DIR__, $context);
       $this->fail("Router is expected to throw an exception.");
     }
     catch (\Exception $e) {

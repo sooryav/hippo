@@ -31,10 +31,9 @@ class Router {
   // $request: Request object that captures request information.
   public function route(
     string $controllerDir,
-    Context $context,
-    Request $request) {
+    Context $context) {
 
-    $requestUrl = $request->m_url;
+    $requestUrl = $context->getRequest()->getUri();
 
     if (!array_key_exists($requestUrl, $this->m_routeMap)) {
       throw new \Exception("The route [$requestUrl] is unknown.");
@@ -52,7 +51,7 @@ class Router {
     require_once($filePath);
 
     $controllerClassName = '\\Controller\\' . $controllerName;
-    $controller = new $controllerClassName($context, $request->m_params);
+    $controller = new $controllerClassName($context);
 
     // Validate the controller's path is same as the one specified
     // in the $m_routeMap.

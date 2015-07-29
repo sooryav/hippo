@@ -12,8 +12,7 @@ abstract class ControllerBase implements ControllerInterface {
   protected function __construct(
     private string $m_name,
     private string $m_path,
-    private \Core\Context $m_context,
-    private Map<string, string> $m_inputs) {
+    private \Core\Context $m_context) {
   }
 
   public function getName(): string {
@@ -25,12 +24,11 @@ abstract class ControllerBase implements ControllerInterface {
   }
 
   protected function getContext(): \Core\Context {
-    //return null;
     return $this->m_context;
   }
 
-  protected function getInputs() : Map<string, string> {
-    return $this->m_inputs;
+  protected function getRequestParams(): \Core\RequestParams {
+    return $this->m_context->getRequest()->getParams();
   }
 
   public function execute(): void {
@@ -38,4 +36,5 @@ abstract class ControllerBase implements ControllerInterface {
   }
 
   protected abstract function render(): :x:element;
+
 }

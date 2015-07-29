@@ -9,42 +9,45 @@ require_once(__DIR__ . '/../config/RouteMap.php');
 use \Core\Context;
 use \Core\LoggerFactory;
 use \Core\Request;
+use \Core\RequestParams;
 use \Core\Router;
 
 class Application {
 
-  public function __construct(
-    private Map<int, string> $m_argv) {
+  private Map<int, string> $m_argv;
+
+  public function __construct(Map<int, string> $argv) {
+    $this->m_argv = $argv;
   }
 
   public function main(): void {
     $this->startSession();
-    $context = $this->createContext();
-    $request = $this->createRequest();
+
+    $logger = (new LoggerFactory())->create('log');
+    $context = new Context($logger, $this->createRequest());
 
     // Just an example how the logging can be done.
-    $context->m_logger->info("Request url is $request->m_url.");
+    $context->getLogger()->info(
+      "Request url is " . $context->getRequest()->getUri() . "."
+    );
 
     // Handle the request using the router.
     $router = new Router(\Config\RouteMap::$s_map);
     $controllerDir = __DIR__ . '/../controller';
 
     try {
-      $router->route($controllerDir, $context, $request);
+      $router->route($controllerDir, $context);
     }
     catch (Exception $e) {
-      $request->m_url = '/error';
-      $request->m_params =
-        Map {'message' => $e->getMessage()};
+      $_SERVER['REQUEST_URI'] = '/error';
+      $_SERVER['REQUEST_METHOD'] = 'GET';
+      $_GET['message'] = $e->getMessage();
 
-      $router->route($controllerDir, $context, $request);
+      $router->route(
+        $controllerDir,
+        new Context($logger, $this->createRequest())
+      );
     }
-  }
-
-  private function createContext(): Context {
-    return new Context(
-      (new LoggerFactory())->create('log'),
-      $this->createRequest());
   }
 
   private function createRequest(): Request {
@@ -54,9 +57,16 @@ class Application {
           ? $this->m_argv[1]
           : '');
 
+    $params = !isset($_SERVER['REQUEST_METHOD'])
+      ? Map{}
+      : ($_SERVER['REQUEST_METHOD'] === 'GET'
+          ? Map::fromArray($_GET)
+          : Map::fromArray($_POST));
+
     return new Request(
       rtrim(strtok($request_url, '?'), "/"),
-      new Map($_REQUEST));
+      new RequestParams($params)
+    );
   }
 
   private function startSession(): void {
@@ -65,6 +75,7 @@ class Application {
     );
     session_start();
   }
+
 }
 
 

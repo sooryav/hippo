@@ -9,25 +9,27 @@ require_once(__DIR__ . '/../core/Context.php');
 
 class AccountController extends ControllerBase {
 
-  public function __construct(\Core\Context $context, Map<string, string> $inputs) {
-    parent::__construct(get_class($this), '/account', $context, $inputs);
+  public function __construct(\Core\Context $context) {
+    parent::__construct(get_class($this), '/account', $context);
   }
 
   <<Override>>
   public function render(): :x:element {
 
-    if (!\Model\Util::securePage($this->getContext(), $_SERVER['PHP_SELF'])){
+    $context = $this->getContext();
+
+    if (!\Model\Util::securePage($context, $_SERVER['PHP_SELF'])){
       die();
     }
 
-    if (!\Model\Util::isUserLoggedIn($this->getContext())) {
+    if (!\Model\Util::isUserLoggedIn($context)) {
       header('Location: /login');
       die();
     }
 
     return
       <account:page:view
-        logged_in_user={$this->getContext()->getRequest()->getLoggedInUser()}
+        logged_in_user={$context->getRequest()->getLoggedInUser()}
       />;
   }
 

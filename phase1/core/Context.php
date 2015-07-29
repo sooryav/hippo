@@ -10,12 +10,16 @@ require_once(__DIR__ . '/Request.php');
 // to this class as it can become unmanagable easily.
 class Context {
 
-  private
-    $m_dbConnection = null;
+  private LoggerInterface $m_logger;
+  private Request $m_request;
+  private $m_dbConnection = null;
 
   public function __construct(
-    public LoggerInterface $m_logger,
-    public Request $m_request) {
+    LoggerInterface $logger,
+    Request $request) {
+    
+    $this->m_logger = $logger;
+    $this->m_request = $request;
   }
 
   public function getLogger() {

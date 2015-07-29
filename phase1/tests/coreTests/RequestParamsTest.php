@@ -18,8 +18,8 @@ class RequestParamsTest extends \PHPUnit_Framework_TestCase {
     );
     
     $this->assertEquals("world", $requestParams->getString("hello"));
-    $this->assertEquals(null, $requestParams->getInt("hello"));
-    $this->assertEquals(null, $requestParams->getFloat("hello"));
+    $this->assertNull($requestParams->getInt("hello"));
+    $this->assertNull($requestParams->getFloat("hello"));
 
     $this->assertEquals(1, $requestParams->getInt("testIntStr"));
     $this->assertEquals(1.0, $requestParams->getFloat("testIntStr"));
@@ -27,7 +27,7 @@ class RequestParamsTest extends \PHPUnit_Framework_TestCase {
 
     $this->assertEquals(2, $requestParams->getInt("testInt"));
     $this->assertEquals(2.0, $requestParams->getFloat("testInt"));
-    $this->assertEquals(null, $requestParams->getString("testInt"));
+    $this->assertNull($requestParams->getString("testInt"));
 
     $this->assertEquals(1.5, $requestParams->getFloat("testFloatStr"));
     $this->assertEquals(1, $requestParams->getInt("testFloatStr"));
@@ -35,7 +35,10 @@ class RequestParamsTest extends \PHPUnit_Framework_TestCase {
 
     $this->assertEquals(2.5, $requestParams->getFloat("testFloat"));
     $this->assertEquals(2, $requestParams->getInt("testFloat"));
-    $this->assertEquals(null, $requestParams->getString("testFloat"));
+    $this->assertNull($requestParams->getString("testFloat"));
+
+    $this->assertNull($requestParams->getInt("dummy"));
+    $this->assertEquals(false, $requestParams->isEmpty());
   }
 
 }
