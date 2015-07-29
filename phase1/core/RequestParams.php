@@ -20,9 +20,14 @@ class RequestParams {
     return (float)$this->get(fun('is_numeric'), $name);
   } 
 
-  // TODO: not sure how to specify the type for $func and
-  // return type of this function.
-  private function get($func, string $paramName) {
+  // Typecasting with generic T type is not supported.
+  // So the type that is actually being returned is whatever
+  // the type of $param is. So the closest thing that can be specified
+  // for the return type is mixed.
+  private function get(
+    (function(mixed): bool) $func,
+    string $paramName): mixed {
+
     if (!$this->m_params->contains($paramName)) {
       return null;
     }
@@ -33,9 +38,7 @@ class RequestParams {
       return null;
     }
     
-    // Typecasting with generic T type is not supported.
-    // So the type that is actually being returned is whatever
-    // the type of $param is.
     return $param;
   }
+
 }
