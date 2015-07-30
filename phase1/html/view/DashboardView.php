@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . '/XPageView.php');
 require_once(__DIR__ . '/../../lib/composer/vendor/autoload.php');
+require_once(__DIR__ . '/../../google-api-php-client/autoload.php');
 require_once(__DIR__ . '/../../entity/Provider.php');
 
 use Entity\Provider;
@@ -9,6 +10,7 @@ use Entity\Provider;
 class :ui:Dashboard extends :x:page:view {
 
   attribute Provider provider @required;
+  attribute bool m_displayCalendar = false;
 
   private function getTable(): XHPRoot {
     $provider = $this->getAttribute('provider');
@@ -35,12 +37,25 @@ class :ui:Dashboard extends :x:page:view {
 
   <<Override>>
   public function getBody(): :x:frag {
+    if (m_displayCalendar)
+    {
+      return <x:frag> {$this->DisplayCalendar()} </x:frag>;
+    }
+    
     return <x:frag> {$this->getTable()} </x:frag>;
   }
 
   <<Override>>
   protected function displayHeader() : bool {
     return false;
+  }
+  
+  public function DisplayCalendar(): XHPRoot {
+    $frame = 
+      <iframe src="https://www.google.com/calendar/embed?src=atulgupta101%40gmail.com&ctz=America/Los_Angeles" 
+        style="border: 0" width={800} height={600} />;
+
+    return $frame;
   }
 
 }
@@ -141,6 +156,7 @@ class :ui:TopNav extends :x:page:view {
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+              <li><a id="calendar" href="#" onclick="DisplayCalendar(); return false;">Calendar</a></li>
               <li><a href="#">Dashboard</a></li>
               <li><a id="settings" href="#">Settings</a></li>
               <li><a id="profile" href="#" onclick="RedirectToProfile();return false;">Profile</a></li>
@@ -158,6 +174,6 @@ class :ui:TopNav extends :x:page:view {
 
     return $nav;
   }
-
+  
 }
 
