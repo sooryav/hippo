@@ -60,8 +60,8 @@ class Application {
     $params = !isset($_SERVER['REQUEST_METHOD'])
       ? Map{}
       : ($_SERVER['REQUEST_METHOD'] === 'GET'
-          ? Map::fromArray($_GET)
-          : Map::fromArray($_POST));
+          ? new Map($_GET)
+          : new Map($_POST));
 
     return new Request(
       rtrim(strtok($request_url, '?'), "/"),
