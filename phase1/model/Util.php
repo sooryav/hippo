@@ -123,9 +123,9 @@ class Util {
     $success_block = null;
     if(count($errors) > 0) {
       $error_block = <div id="error" />;
-      $error_block->appendChild(
-        <a href="#">[X]</a>
-      );
+      //$error_block->appendChild(
+      //  <a href="#">[X]</a>
+      //);
       $error_rows = <ul />;
       foreach($errors as $error) {
         $error_rows->appendChild(
@@ -137,9 +137,9 @@ class Util {
     //Success block
     if (count($successes) > 0) {
       $success_block = <div id="success" />;
-      $success_block->appendChild(
-        <a href="#">[X]</a>
-      );
+      //$success_block->appendChild(
+      //  <a href="#">[X]</a>
+      //);
       $success_rows = <ul />;
       foreach($successes as $success) {
         $success_rows->appendChild(
