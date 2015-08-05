@@ -8,10 +8,10 @@ require_once (__DIR__ . '/../core/Context.php');
 class DatabaseHandler {
 
   const string DB_HOST = "localhost"; //Host address (most likely localhost)
-  const string DB_NAME = "test"; //Name of Database
+  const string DB_NAME = "Hippo"; //Name of Database
   const string DB_USER = "root"; //Name of database user
-  const string DB_PASS = "pwd"; //Password for database user
-  const string DB_TABLE_PREFIX = "test.test_";
+  const string DB_PASS = ""; //Password for database user
+  const string DB_TABLE_PREFIX = "";
 
   private
     $m_mysqli = null,
