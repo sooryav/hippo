@@ -86,7 +86,6 @@ class Util {
 
   //Inputs language strings from selected language.
   public static function lang($key,$markers = NULL) {
-    return $key;
     $lang = ErrorMessages::$lang;
     if($markers == NULL) {
       $str = $lang[$key];
@@ -133,6 +132,7 @@ class Util {
           <li>{$error}</li>
         );
       }
+      $error_block->appendChild($error_rows);
     }
     //Success block
     if (count($successes) > 0) {
@@ -146,6 +146,7 @@ class Util {
           <li>{$success}</li>
         );
       }
+      $success_block->appendChild($success_rows);
     }
     return
       <div>
