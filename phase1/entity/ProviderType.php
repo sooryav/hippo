@@ -11,7 +11,7 @@ namespace Entity;
 //
 // 3) Create a new file ProviderType.php. BAsically have a separate file for
 // every enum.
-enum ProviderType : int {
+enum ProviderType1 : int {
   Restaurant = 0;
   // TODO: Need to find a better type for this
   PumpitUpTypes = 1;
