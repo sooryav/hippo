@@ -26,20 +26,20 @@ enum VenueFeatures : int {
   FilmingLocation = 2;
   PhotoShoot = 3;
   BirthdayParty = 4;
-  OutsideFoodAllowed =
+  OutsideFoodAllowed = 5;
 }
 
 enum VenueType : string {
-  Restaurant = 0;  
+  Restaurant = "0";
   BanquetHall = "Banquet Hall";
   Residential = "Residential";
   Gallery = "Gallery";
-  Bar = 3;
-  ConferenceCenter = 4;
-  Loft = 5;
-  Warehouse = 6;
+  Bar = "3";
+  ConferenceCenter = "4";
+  Loft = "5";
+  Warehouse = "6";
 }
 
 enum Cuisines : string {
-  "Asian" = "Asian";
+  Asian = "Asian1";
 }
