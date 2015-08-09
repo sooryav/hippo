@@ -15,9 +15,11 @@ abstract class ProviderNew {
     public string $m_providerId,
     public string $m_providerName,
     public string $m_providerDescription,
-    public Contact $m_contact,
+    public Vector<Contact> $m_contact,
     public ProviderType $m_providerType,
-    public Address $m_address) {
+    public Vector<Address> $m_address) {
   }
+
+  abstract public function getaddress() : Vector<Address> ;
 
 }

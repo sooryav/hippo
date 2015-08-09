@@ -22,11 +22,11 @@ class Context {
     $this->m_request = $request;
   }
 
-  public function getLogger() {
+  public function getLogger(): LoggerInterface {
     return $this->m_logger;
   }
 
-  public function getRequest() {
+  public function getRequest(): Request{
     return $this->m_request;
   }
 
