@@ -34,7 +34,7 @@ class UserDataFactory implements IUserDataFactory {
     }
 
     public function GetUserByName($userName) {
-    	$query = sprintf("SELECT * FROM Hippo.User where UserName = '%s'", $userName);
+    	$query = "SELECT * FROM `Hippo`.`users` where `user_name` = '$userName'";
         $result = $this->_dbContext->query($query);
 
         if (!$result) {
@@ -66,18 +66,18 @@ class UserDataFactory implements IUserDataFactory {
 
         $userArray = $myArray[0];
 
-        $user = new User();
-        $user->m_userName = $userArray["UserName"];
-        $user->m_userId = $userArray["UserId"];
-        $user->m_password = $userArray["Password"];
+        $user = new User($userArray["user_name"], $userArray["password"], $userArray["email"]);
+        $user->m_userId = $userArray["id"];
         $user->m_userToken = $userArray["Token"];
-        $user->m_activationToken = $userArray["ActivationTokenId"];        
+        $user->m_activationToken = $userArray["activation_token"];        
         return $user;
     }
 
     public function AddUser(User $user) {
+        echo "Enter: AddUser Method\n";
 
         if (!isset($user)) {
+            echo "AddUser Method Error: User object not set\n";
             return false;
         }
 
@@ -88,11 +88,12 @@ class UserDataFactory implements IUserDataFactory {
             return false;
         }
 
-    	$query = sprintf("INSERT INTO `Hippo`.`User`
-						(`UserName`, `Password`, `Token`, `ActivationTokenId`) VALUES
-						('%s', '%s', '%s', %s)", 
+    	$query = sprintf("INSERT INTO `Hippo`.`users`
+						(`user_name`, `password`, `email`, `Token`, `activation_token`) VALUES
+						('%s', '%s', '%s', '%s', '%s')", 
 						$user->m_userName, 
-						$user->m_password, 
+						$user->m_password,
+                        $user->m_emailId, 
 						$user->m_userToken, 
 						$user->m_activationToken
 						);
@@ -101,6 +102,11 @@ class UserDataFactory implements IUserDataFactory {
 
         $result = $this->_dbContext->query($query);
 
+        if (!$result) {
+            echo "Error executing query: $query. Result: $result" . $this->_dbContext->error;
+            return null;
+        }
+
         $resultString = $result ? 'true' : 'false';
         echo "Query Result: $resultString\n";
 
@@ -108,16 +114,22 @@ class UserDataFactory implements IUserDataFactory {
     }
 
     public function DeleteUserById($userId) {
+        echo "Enter: DeleteUserById Method\n";
 
         if (!isset($userId)) {
             return false;
         }
 
-        $query = sprintf("DELETE FROM `Hippo`.`User` WHERE `UserId`='%s'", $userId);
+        $query = sprintf("DELETE FROM `Hippo`.`users` WHERE `id`='%s'", $userId);
 
         echo "Query: $query\n";
 
         $result = $this->_dbContext->query($query);
+
+        if (!$result) {
+            echo "Error executing query: $query. Result: $result" . $this->_dbContext->error;
+            return null;
+        }
         
         $resultString = $result ? 'true' : 'false';
         echo "Query Result: $resultString\n";
@@ -151,8 +163,8 @@ class ProviderDataFactory implements IProviderDataFactory {
         
         while($row = $result->fetch_array(MYSQL_ASSOC)) {
             $providerList[] = Provider::CreateProvider($row["Name"], 
-                $row["Id"], 
-                $row["UserId"], 
+                (int)$row["Id"], 
+                (int)$row["UserId"], 
                 $row["Description"], 
                 $row["ZipCode"]
                 );

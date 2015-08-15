@@ -19,9 +19,11 @@ class DataTests extends \PHPUnit_Framework_TestCase {
       /*
       * Skipping these tests until we figure out creating DB etc.,
       */
+      /*
       $this->markTestSkipped(
         'DB is not setup. Skipping tests!'
       );
+      */
   }
 
   public function testUserData() {
@@ -45,15 +47,17 @@ class DataTests extends \PHPUnit_Framework_TestCase {
       $userFactory->DeleteUserById($user->m_userId);
     }
 
-    $user = new User();
-    $user->m_userName = $userName;
-    $user->m_password = "Password";
+    $user = new User($userName, "Password", "test@planninghippo.com");
     $user->m_userToken = "1234Abcd";
-    $user->m_activationToken = 2;   
+    $user->m_activationToken = "Activate1234";   
+
+    echo "Adding user with user name: $user->m_userName\n";
 
     $userFactory->AddUser($user);
     
     $user = $userFactory->GetUserByName($userName);
+
+    $this->assertNotNull($user);
 
     $this->assertEquals($user->m_userName, $userName);
   }

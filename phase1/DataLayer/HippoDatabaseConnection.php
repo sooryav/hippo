@@ -37,8 +37,7 @@ class DatabaseConnection
 
         $connection = mysql_connect($host, $user, $password);
 
-        if(!$connection)
-        {
+        if(!$connection) {
             return false;
         }
         return true;        

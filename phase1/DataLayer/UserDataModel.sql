@@ -33,8 +33,8 @@ USE Hippo;
 DROP TABLE IF EXISTS permissions;
 
 CREATE TABLE IF NOT EXISTS permissions (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  name varchar(150) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
@@ -46,18 +46,19 @@ INSERT INTO permissions (id, name) VALUES
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE IF NOT EXISTS users (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   user_name varchar(50) NOT NULL,
-  display_name varchar(50) NOT NULL,
+  display_name varchar(50) DEFAULT NULL,
   password varchar(225) NOT NULL,
   email varchar(150) NOT NULL,
-  activation_token varchar(225) NOT NULL,
-  last_activation_request int(11) NOT NULL,
-  lost_password_request tinyint(1) NOT NULL,
-  active tinyint(1) NOT NULL,
-  title varchar(150) NOT NULL,
-  sign_up_stamp int(11) NOT NULL,
-  last_sign_in_stamp int(11) NOT NULL,
+  activation_token varchar(225) DEFAULT NULL,
+  last_activation_request int(11) DEFAULT NULL,
+  lost_password_request tinyint(1) DEFAULT NULL,
+  active tinyint(1) DEFAULT NULL,
+  title varchar(150) DEFAULT NULL,
+  sign_up_stamp int(11) DEFAULT NULL,
+  last_sign_in_stamp int(11) DEFAULT NULL,
+  `Token` varbinary(256) DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
