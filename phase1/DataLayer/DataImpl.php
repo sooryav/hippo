@@ -15,12 +15,19 @@ require_once(__DIR__ . '/HippoDataInterfaces.php');
 
 class DataFactory implements IDataFactory {
 
-    public function GetUserDataFactory(IDataConnectionFactory $connectionFactory) {
-    	return new UserDataFactory($connectionFactory);
+    private IDataConnectionFactory $m_dataConnectionFactory = null;
+
+    public function __construct(IDataConnectionFactory $connectionFactory) {
+       $this->m_dataConnectionFactory = $connectionFactory;      
+        
     }
 
-    public function GetProviderDataFactory(IDataConnectionFactory $connectionFactory) {
-    	return new ProviderDataFactory($connectionFactory);
+    public function GetUserDataFactory() {
+    	return new UserDataFactory($this->m_dataConnectionFactory);
+    }
+
+    public function GetProviderDataFactory() {
+    	return new ProviderDataFactory($this->m_dataConnectionFactory);
     }
 };
 

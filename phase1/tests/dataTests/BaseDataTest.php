@@ -33,9 +33,9 @@ class DataTests extends \PHPUnit_Framework_TestCase {
     echo "\n";
 
     $dataConnectionFactory = new \DataAccessLayer\MySqlDataConnectionFactory();
-    $dataFactory = new \DataAccessLayer\DataFactory();
+    $dataFactory = new \DataAccessLayer\DataFactory($dataConnectionFactory);
 
-    $userFactory = $dataFactory->GetUserDataFactory($dataConnectionFactory);
+    $userFactory = $dataFactory->GetUserDataFactory();
 
     while(true) {
       $user = $userFactory->GetUserByName($userName);
@@ -69,9 +69,9 @@ class DataTests extends \PHPUnit_Framework_TestCase {
     echo "Starting Provider test\n";
 
     $dataConnectionFactory = new \DataAccessLayer\MySqlDataConnectionFactory();
-    $dataFactory = new \DataAccessLayer\DataFactory();
+    $dataFactory = new \DataAccessLayer\DataFactory($dataConnectionFactory);
 
-    $providerFactory = $dataFactory->GetProviderDataFactory($dataConnectionFactory);
+    $providerFactory = $dataFactory->GetProviderDataFactory();
 
     $providerList = $providerFactory->GetAllProviders($zipCode);
     echo "Found existing providers with Zip code name $zipCode\n";
