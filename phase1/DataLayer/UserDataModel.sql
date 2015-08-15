@@ -30,6 +30,9 @@ USE Hippo;
 
 -- ---------------------------------------------------------
 
+/* drop events table before users table due to foreign key constraint */
+DROP TABLE IF EXISTS events;
+
 DROP TABLE IF EXISTS permissions;
 
 CREATE TABLE IF NOT EXISTS permissions (
@@ -179,4 +182,68 @@ INSERT INTO permission_page_matches (id, permission_id, page_id) VALUES
   (11, 2, 9),
   (12, 2, 14),
   (13, 2, 17);
+
+
+
+CREATE TABLE IF NOT EXISTS events (
+  EventId varchar(50) NOT NULL,
+  ETag varchar(50) NOT NULL,
+  Summary varchar(300) NOT NULL,
+  Description varchar(500) NOT NULL,
+  AddressId bigint(20) NOT NULL,
+  StartTime date NOT NULL,
+  EndTime date NULL,
+  TimeZone varchar(50) NOT NULL,
+  MaxAttendees int(11) NULL,
+  OrganizerUserId int(11) NOT NULL,
+  ColorId int(4) NULL,
+  SendReminder tinyint(1) NOT NULL,
+  ReminderMethod int(4) NOT NULL,
+  ReminderTime int(4) NOT NULL,
+  PRIMARY KEY (EventId),
+  FOREIGN KEY(OrganizerUserId)
+      REFERENCES users(Id),
+  FOREIGN KEY(AddressId)
+      REFERENCES provideraddress(AddressId)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+/*ALTER TABLE `events`
+  ADD CONSTRAINT `FeatureId_FK` FOREIGN KEY (`AddressId`) REFERENCES `provideraddress` (`AddressId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+/*
+ALTER TABLE `events`
+  ADD CONSTRAINT `FeatureId_FK` FOREIGN KEY (`OrganizerUserId`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+*/
+
+INSERT INTO events (
+  EventId,
+  ETag,
+  Summary,
+  Description,
+  AddressId,
+  StartTime,
+  EndTime,
+  TimeZone,
+  MaxAttendees,
+  OrganizerUserId,
+  ColorId,
+  SendReminder,
+  ReminderMethod,
+  ReminderTime
+) VALUES (
+  'testeventid',
+  'testetag',
+  'testsummary',
+  'testdesc',
+  1,
+  NOW(),
+  NOW(),
+  'testtimezone',
+  10,
+  1,
+  1,
+  1,
+  0,
+  30
+);
 
