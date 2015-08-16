@@ -15,22 +15,24 @@ class DashboardController extends ControllerBase {
 
   <<Override>>
   public function render(): :x:element {
-
     // The following controller connects to Provider's dashboard model class.
-
     $params = $this->getRequestParams();
 
     $profile = $params->getString('GetProfile');
+    $calendar = $params->getString('DisplayCalendar');
 
-    if (!is_null($profile)) {
+    if (isset($calendar)) {
+      return <ui:Dashboard m_displayCalendar={true} />;
+    }
+    else if (!is_null($profile)) {
       $provider = (new \Model\DashboardModel())->getProfile();
   
       return <ui:Dashboard provider={$provider} />;
     }
     else {
       // TODO: This will probably not work since params type has changed.
-      $jsonRequest = json_encode($params);
-      echo $jsonRequest;
+      //$jsonRequest = json_encode($params);
+      //echo $jsonRequest;
       return <ui:TopNav />;
     }
   }

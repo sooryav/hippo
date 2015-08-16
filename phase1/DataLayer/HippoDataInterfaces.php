@@ -21,8 +21,8 @@ abstract class ProviderType {
 };
 
 interface IDataFactory {
-    public function GetUserDataFactory(IDataConnectionFactory $connectionFactory);
-    public function GetProviderDataFactory(IDataConnectionFactory $connectionFactory);
+    public function GetUserDataFactory();
+    public function GetProviderDataFactory();
 };
 
 interface IUserDataFactory {

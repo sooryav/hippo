@@ -4,8 +4,60 @@
 		"selected_items":
 		[
 			[
+				"GetAl",
+				"GetAllProvidersInternal"
+			],
+			[
+				"provi",
+				"providerList"
+			],
+			[
+				"Pro",
+				"provider"
+			],
+			[
+				"m_user",
+				"m_userId"
+			],
+			[
+				"exis",
+				"existingVendorCount"
+			],
+			[
+				"vendor",
+				"vendorList"
+			],
+			[
+				"vend",
+				"vendorList"
+			],
+			[
+				"m_p",
+				"m_password"
+			],
+			[
 				"user",
-				"userFactory"
+				"userName"
+			],
+			[
+				"_a",
+				"_addressLine1"
+			],
+			[
+				"pro",
+				"ProvideType"
+			],
+			[
+				"_use",
+				"_userId"
+			],
+			[
+				"_user",
+				"_userToken"
+			],
+			[
+				"_u",
+				"_userName"
 			],
 			[
 				"connect",
@@ -19,6 +71,89 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "DataImpl.php",
+			"settings":
+			{
+				"buffer_size": 7675,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "HippoDataInterfaces.php",
+			"settings":
+			{
+				"buffer_size": 1007,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "HippoDataFactoryInterface.php",
+			"settings":
+			{
+				"buffer_size": 341,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "HippoDatabaseConnection.php",
+			"settings":
+			{
+				"buffer_size": 1291,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "MySqlDataFatory.php",
+			"settings":
+			{
+				"buffer_size": 728,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Remote:   origin @ git@github.com:sooryav/hippo.git\nLocal:    Seenu /Git/Hippo/hippo\nHead:     9eaf2cb Skipping data tests until we figure out DB setup on other machines as part of test setup.\n\n\nUntracked files:\n	phase1/DataLayer/.hhconfig\n	phase1/tests/dataTests/.hhconfig\n	phase1/tests/dataTests/run\n\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
+			"settings":
+			{
+				"buffer_size": 1064,
+				"line_ending": "Unix",
+				"name": "*git-status*: hippo",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "/Git/Hippo/hippo/phase1/tests/dataTests/BaseDataTest.php",
+			"settings":
+			{
+				"buffer_size": 3068,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Entities.php",
+			"settings":
+			{
+				"buffer_size": 2485,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "hippo_vendor_datamodel.sql",
+			"settings":
+			{
+				"buffer_size": 7835,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "UserDataModel.sql",
+			"settings":
+			{
+				"buffer_size": 688,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -56,16 +191,34 @@
 	},
 	"file_history":
 	[
+		"/Git/Hippo/hippo/phase1/DataLayer/HippoDataProvider.php",
+		"/Git/Hippo/hippo/phase1/DataLayer/UserDataModel.sql",
+		"/Git/Hippo/hippo/phase1/DataLayer/hippo_vendor_datamodel.sql",
+		"/Git/Hippo/hippo/phase1/DataLayer/IHippoDataProvider.php",
+		"/Git/Hippo/hippo/phase1/tests/dataTests/run",
+		"/Git/Hippo/hippo/phase1/tests/modelTests/ExampleModelTest.php",
+		"/Git/Hippo/hippo/phase1/tests/coreTests/RouterTest.php",
+		"/Git/Hippo/hippo/phase1/html/view/XPageView.php",
+		"/Git/Hippo/hippo/phase1/html/view/LeftNavView.php",
+		"/Git/Hippo/hippo/phase1/html/view/VenueView.php",
+		"/Git/Hippo/hippo/phase1/html/view/LoginPageView.php",
+		"/Git/Hippo/hippo/phase1/html/view/ErrorPageView.php",
+		"/Git/Hippo/hippo/phase1/html/view/DashboardView.php",
+		"/Git/Hippo/hippo/phase1/tests/dataTests/BaseDataTests.php",
+		"/Git/Hippo/hippo/phase1/DataLayer/Entities.php",
+		"/Git/Hippo/hippo/phase1/lib/composer/vendor/bin/phpunit",
+		"/Git/Hippo/hippo/phase1/tests/run",
+		"/Git/Hippo/hippo/phase1/lib/composer/vendor/phpunit/phpunit/tests/bootstrap.php",
+		"/Git/Hippo/hippo/phase1/lib/composer/vendor/autoload.php",
+		"/Git/Hippo/hippo/phase1/lib/composer/vendor/phpunit/phpunit/README.md",
+		"/Git/Hippo/hippo/phase1/lib/composer/vendor/phpunit/phpunit/phpunit",
 		"/Git/Hippo/hippo/DAL/HippoDataInterfaces.php",
 		"/Git/Hippo/hippo/DAL/DataImpl.php",
-		"/Git/Hippo/hippo/phase1/tests/dataTests/BaseDataTests.php",
-		"/Git/Hippo/hippo/phase1/tests/run",
 		"/Git/Hippo/hippo/DAL/HippoDataProvider.php",
 		"/Git/Hippo/hippo/DAL/hippo_vendor_datamodel.sql",
 		"/Git/Hippo/hippo/DAL/UserDataModel.sql",
 		"/Git/Hippo/hippo/DAL/HippoDataFactoryInterface.php",
 		"/Git/Hippo/hippo/DAL/MySqlDataFatory.php",
-		"/Git/Hippo/hippo/phase1/tests/modelTests/ExampleModelTest.php",
 		"/Git/Hippo/hippo/phase1/tests/dataTests/BaseDataTests",
 		"/Git/Hippo/hippo/readme.txt",
 		"/Git/Hippo/hippo/DAL/MySqlDataFatort.php",
@@ -74,7 +227,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -85,9 +238,32 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"var_dump",
+			"$this",
+			"int",
+			"string",
+			";",
+			"$m_",
+			";",
+			"$m_",
+			"m_",
+			"$m_",
+			"public ",
+			";",
+			"vendor",
+			"Vendor",
+			": }>",
+			"<{",
+			"Vendor",
+			"vendor",
+			"Vendors",
+			"vendorCount",
+			"$myArray",
+			"$_",
+			"private"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -95,6 +271,28 @@
 		"regex": false,
 		"replace_history":
 		[
+			"$provider",
+			"public int",
+			"public string",
+			" = ;",
+			"$this->m_",
+			"$this->m_;",
+			" = ;",
+			" =;",
+			"=;",
+			"$this->",
+			"",
+			"provider",
+			"Provider",
+			"",
+			"'%s'",
+			"Provider",
+			"provider",
+			"Providers",
+			"providerCount",
+			"$userArray",
+			"$m_",
+			"public"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -105,8 +303,287 @@
 	"groups":
 	[
 		{
+			"selected": 3,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "DataImpl.php",
+					"settings":
+					{
+						"buffer_size": 7675,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2778,
+								2778
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1460.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "HippoDataInterfaces.php",
+					"settings":
+					{
+						"buffer_size": 1007,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								249,
+								249
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 68.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "HippoDataFactoryInterface.php",
+					"settings":
+					{
+						"buffer_size": 341,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "HippoDatabaseConnection.php",
+					"settings":
+					{
+						"buffer_size": 1291,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								973,
+								973
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 107.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "MySqlDataFatory.php",
+					"settings":
+					{
+						"buffer_size": 728,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								707,
+								707
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"settings":
+					{
+						"buffer_size": 1064,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								194,
+								194
+							]
+						],
+						"settings":
+						{
+							"__vi_external_disable": true,
+							"draw_white_space": "none",
+							"git_repo": "/Git/Hippo/hippo",
+							"git_status": true,
+							"git_view": "status",
+							"syntax": "Packages/SublimeGit/syntax/SublimeGit Status.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Git/Hippo/hippo/phase1/tests/dataTests/BaseDataTest.php",
+					"settings":
+					{
+						"buffer_size": 3068,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								496,
+								496
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Entities.php",
+					"settings":
+					{
+						"buffer_size": 2485,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2039,
+								2039
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 51.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "hippo_vendor_datamodel.sql",
+					"settings":
+					{
+						"buffer_size": 7835,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2095,
+								2095
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1377.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "UserDataModel.sql",
+					"settings":
+					{
+						"buffer_size": 688,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								688,
+								688
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -116,7 +593,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 33.0
 	},
 	"layout":
 	{
@@ -141,9 +618,13 @@
 		]
 	},
 	"menu_visible": true,
+	"output.git-commit":
+	{
+		"height": 112.0
+	},
 	"replace":
 	{
-		"height": 0.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -166,6 +647,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 208.0,
 	"status_bar_visible": true
 }

@@ -30,11 +30,14 @@ USE Hippo;
 
 -- ---------------------------------------------------------
 
+/* drop events table before users table due to foreign key constraint */
+DROP TABLE IF EXISTS events;
+
 DROP TABLE IF EXISTS permissions;
 
 CREATE TABLE IF NOT EXISTS permissions (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  name varchar(150) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
@@ -46,18 +49,19 @@ INSERT INTO permissions (id, name) VALUES
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE IF NOT EXISTS users (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   user_name varchar(50) NOT NULL,
-  display_name varchar(50) NOT NULL,
+  display_name varchar(50) DEFAULT NULL,
   password varchar(225) NOT NULL,
   email varchar(150) NOT NULL,
-  activation_token varchar(225) NOT NULL,
-  last_activation_request int(11) NOT NULL,
-  lost_password_request tinyint(1) NOT NULL,
-  active tinyint(1) NOT NULL,
-  title varchar(150) NOT NULL,
-  sign_up_stamp int(11) NOT NULL,
-  last_sign_in_stamp int(11) NOT NULL,
+  activation_token varchar(225) DEFAULT NULL,
+  last_activation_request int(11) DEFAULT NULL,
+  lost_password_request tinyint(1) DEFAULT NULL,
+  active tinyint(1) DEFAULT NULL,
+  title varchar(150) DEFAULT NULL,
+  sign_up_stamp int(11) DEFAULT NULL,
+  last_sign_in_stamp int(11) DEFAULT NULL,
+  `Token` varbinary(256) DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -178,4 +182,68 @@ INSERT INTO permission_page_matches (id, permission_id, page_id) VALUES
   (11, 2, 9),
   (12, 2, 14),
   (13, 2, 17);
+
+
+
+CREATE TABLE IF NOT EXISTS events (
+  EventId varchar(50) NOT NULL,
+  ETag varchar(50) NOT NULL,
+  Summary varchar(300) NOT NULL,
+  Description varchar(500) NOT NULL,
+  AddressId bigint(20) NOT NULL,
+  StartTime date NOT NULL,
+  EndTime date NULL,
+  TimeZone varchar(50) NOT NULL,
+  MaxAttendees int(11) NULL,
+  OrganizerUserId int(11) NOT NULL,
+  ColorId int(4) NULL,
+  SendReminder tinyint(1) NOT NULL,
+  ReminderMethod int(4) NOT NULL,
+  ReminderTime int(4) NOT NULL,
+  PRIMARY KEY (EventId),
+  FOREIGN KEY(OrganizerUserId)
+      REFERENCES users(Id),
+  FOREIGN KEY(AddressId)
+      REFERENCES provideraddress(AddressId)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+/*ALTER TABLE `events`
+  ADD CONSTRAINT `FeatureId_FK` FOREIGN KEY (`AddressId`) REFERENCES `provideraddress` (`AddressId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+/*
+ALTER TABLE `events`
+  ADD CONSTRAINT `FeatureId_FK` FOREIGN KEY (`OrganizerUserId`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+*/
+
+INSERT INTO events (
+  EventId,
+  ETag,
+  Summary,
+  Description,
+  AddressId,
+  StartTime,
+  EndTime,
+  TimeZone,
+  MaxAttendees,
+  OrganizerUserId,
+  ColorId,
+  SendReminder,
+  ReminderMethod,
+  ReminderTime
+) VALUES (
+  'testeventid',
+  'testetag',
+  'testsummary',
+  'testdesc',
+  1,
+  NOW(),
+  NOW(),
+  'testtimezone',
+  10,
+  1,
+  1,
+  1,
+  0,
+  30
+);
 
